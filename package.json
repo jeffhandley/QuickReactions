@@ -1,0 +1,25 @@
+{
+  "name": "QuickReactions",
+  "version": "0.1.0",
+  "description": "Isomorphic Hello World with React and Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeffhandley/QuickReactions.git"
+  },
+  "keywords": [
+    "nodejs",
+    "reactjs",
+    "isomorphic",
+    "sample"
+  ],
+  "author": "Jeff Handley",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/jeffhandley/QuickReactions/issues"
+  },
+  "homepage": "https://github.com/jeffhandley/QuickReactions"
+}
