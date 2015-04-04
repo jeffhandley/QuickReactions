@@ -1,9 +1,18 @@
-# Quick Reactions - Isomorphic Hello World with React and Node
+# Quick Reactions
+## Isomorphic Hello World with React and Node
 
-While trying to learn Node.js and React.js, I was hoping to find a skeleton Hello World sample that demonstrated both server-side and client-side use of React, but I couldn't find one.  This project aims to achieve the bare minimum functionality while exercising the isomorphic approach.
+While working through sample after sample for Node.js and React.js, I experienced a pattern that wasn't very helpful. Instead of truly starting from scratch, the samples kept walking through step-by-step of cloning a working solution.  They'd start with "Step 1: paste this fully-working code into this file" and "Step 2: paste this fully-working code into this other file." But I haven't been able to find a breakdown of the concepts being applied.
 
-## Starting from Scratch
-While following through sample after sample for Node and React, I found that they kept following a pattern that wasn't very helpful. Instead of truly starting from scratch, the samples I found kept walking through step-by-step of cloning a working solution--Step 1: paste in this complex file--Step 2: paste in this other complex file.  I wanted to learn by starting truly from scratch and building the app up in logical, incremental steps.
+I wanted to learn by starting truly from scratch and building the app up in logical, incremental steps. This tutorial (which is a work in progress) will use the following approach:
+
+1. Create a Hello World web server in Node.js
+1. Introduce server-side React.js JSX compilation to use React.js on the server
+1. Extract a React.js component from the code and render it on the server
+1. Introduce a client-side React.js component (without JSX) to render on the page
+1. Refactor the client-side component to use JSX
+1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
+
+Let's get started!
 
 ### Create a new "project"
 1. CD into a new directory
