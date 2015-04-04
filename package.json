@@ -24,5 +24,8 @@
   "homepage": "https://github.com/jeffhandley/QuickReactions",
   "devDependencies": {
     "react-tools": "^0.13.1"
+  },
+  "dependencies": {
+    "react": "^0.13.1"
   }
 }
