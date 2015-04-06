@@ -19,7 +19,7 @@ gulp.task('node', ['watch-jsx'], function() {
     gulpNodemon({
         script: 'lib/index.js',
         ignore: ['gulpfile.js'],
-        ext: 'js'
+        ext: 'js jsx'
     })
 })
 

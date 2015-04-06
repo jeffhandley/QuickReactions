@@ -277,7 +277,7 @@ gulp.task('node', ['watch-jsx'], function() {
     gulpNodemon({
         script: 'lib/index.js',
         ignore: ['gulpfile.js'],
-        ext: 'js'
+        ext: 'js jsx'
     })
 })
 
@@ -288,7 +288,7 @@ gulp.task('default', function() {
 
 Next, run Gulp to see that it starts the server after transforming `index.jsx` into `lib/index.js`.  Then edit `index.jsx` to have the following content.  After saving the file, you'll see that everything automatically reruns.
 
-``` js
+``` jsx
 var http = require('http')
 var React = require('react')
 
@@ -309,6 +309,55 @@ http.createServer(function (req, res) {
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
+
+### Creating a React Component
+With Gulp running, let's create a new component and watch it automatically get transformed from a JSX file into a JS file under the `lib` folder.
+
+Here is the component we'll create as the `Components/HelloWorld.jsx` file.
+
+``` jsx
+var React = require('react')
+
+module.exports = React.createClass({
+    render: function() {
+        return (
+            <div>
+                This is from the HelloWorld.jsx component's render function.
+            </div>
+        )
+    }
+})
+```
+
+Now we will use this component from within `index.jsx` by first adding a `require` statement and then using an html-like JSX tag to reference the component.
+
+``` jsx
+var http = require('http')
+  , React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    res.end(
+        React.renderToString(
+            <html>
+                <head>
+                    <title>Hello World</title>
+                </head>
+            <body>
+                <HelloWorld />
+                <div>
+                    Rendered from the Server!
+                </div>
+            </body>
+        </html>)
+    )
+}).listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Notice that in the `require` statement, we omit the file extension--the .js extension will be used automatically.  It's noteworthy that we've created the component as `Components/HelloWorld.jsx` but it will get transformed into `lib/Components/HelloWorld.js`.  Likewise, even though we're writing code in `index.jsx`, it will be running from `lib/index.js` where its relative path reference to `./Components/HelloWorld` will result in finding `lib/Components/HelloWorld.js`.  At first, I thought there would be some gymnastics or inconsistencies surfacing here, but since `require` assumes the `.js` file extension, it comes together pretty cleanly.
+
 
 ## References
 
