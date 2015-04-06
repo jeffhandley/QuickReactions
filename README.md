@@ -191,7 +191,7 @@ gulp.task('jsx', function(cb) {
     })
 })
 
-gulp.task('node', ['jsx'], function(cb) {
+gulp.task('node', ['jsx'], function() {
     spawn('node', ['./lib/index.js'], { stdio: 'inherit'})
 })
 
@@ -211,7 +211,7 @@ Now, let's rewrite `gulpfile.js` to use gulp-react to process `*.jsx` files and 
 var gulp = require('gulp')
   , gulpReact = require('gulp-react')
 
-gulp.task('jsx', function(cb) {
+gulp.task('jsx', function() {
     return gulp.src('*.jsx')
                .pipe(gulpReact())
                .pipe(gulp.dest('lib'))
@@ -224,6 +224,91 @@ gulp.task('default', function() {
 
 Gulp's piping make this really clean.  And we can now use gulp-nodemon to take care of running Node for us.
 
+1. npm install gulp-nodemon --save-dev
+
+With this package in place, we can easily get Node to restart whenever a JS file is updated.  Here's our new `gulpfile.js` with that plugged in.
+
+``` js
+var gulp = require('gulp')
+  , gulpReact = require('gulp-react')
+  , gulpNodemon = require('gulp-nodemon')
+
+gulp.task('jsx', function() {
+    return gulp.src('*.jsx')
+               .pipe(gulpReact())
+               .pipe(gulp.dest('lib'))
+})
+
+gulp.task('node', ['jsx'], function() {
+    gulpNodemon({
+        script: 'lib/index.js',
+        ext: 'js'
+    })
+})
+
+gulp.task('default', function() {
+    gulp.start('node')
+})
+```
+
+To see the effects of this, try editing the `lib/index.js` file directly and you'll see that nodemon will restart the server for us right away.
+
+To bring this all together, we need to get Gulp to watch our `index.jsx` file and call our `jsx` task whenever the file is touched. Then we run Gulp once and freely edit the index.jsx file and have the changes pick up automatically.
+
+``` js
+var gulp = require('gulp')
+  , gulpReact = require('gulp-react')
+  , gulpNodemon = require('gulp-nodemon')
+  , gulpWatch = require('gulp-watch')
+
+gulp.task('watch-jsx', ['jsx'], function() {
+    gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
+        gulp.start('jsx')
+    })
+})
+
+gulp.task('jsx', function() {
+    return gulp.src('**/*.jsx')
+               .pipe(gulpReact())
+               .pipe(gulp.dest('lib'))
+})
+
+gulp.task('node', ['watch-jsx'], function() {
+    gulpNodemon({
+        script: 'lib/index.js',
+        ignore: ['gulpfile.js'],
+        ext: 'js'
+    })
+})
+
+gulp.task('default', function() {
+    gulp.start('node')
+})
+```
+
+Next, run Gulp to see that it starts the server after transforming `index.jsx` into `lib/index.js`.  Then edit `index.jsx` to have the following content.  After saving the file, you'll see that everything automatically reruns.
+
+``` js
+var http = require('http')
+var React = require('react')
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    res.end(
+        React.renderToString(
+            <html>
+                <head>
+                    <title>Hello World</title>
+                </head>
+            <body>
+                index.jsx, automatically processed through gulp and gulp-react,
+                with node automatically restarted through gulp-nodemon!
+            </body>
+        </html>)
+    )
+}).listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
 
 ## References
 

@@ -9,9 +9,11 @@ http.createServer(function (req, res) {
                 <head>
                     <title>Hello World</title>
                 </head>
-            <body>index.jsx compiled into index.js by hand on the server</body>
+            <body>
+                index.jsx, automatically processed through gulp and gulp-react,
+                with node automatically restarted through gulp-nodemon!
+            </body>
         </html>)
     )
 }).listen(1337)
-
 console.log('Server running at http://localhost:1337/')

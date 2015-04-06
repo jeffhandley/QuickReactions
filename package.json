@@ -24,7 +24,9 @@
   "homepage": "https://github.com/jeffhandley/QuickReactions",
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-react": "^3.0.1"
+    "gulp-nodemon": "^2.0.2",
+    "gulp-react": "^3.0.1",
+    "gulp-watch": "^4.2.3"
   },
   "dependencies": {
     "react": "^0.13.1"
