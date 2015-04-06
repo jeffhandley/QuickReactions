@@ -49,8 +49,9 @@ http.createServer(function (req, res) {
                 <head>
                     <title>Hello World</title>
                 </head>
-            <body>index.jsx compiled into index.js by hand on the server</body>
-        </html>)
+                <body>index.jsx compiled into index.js by hand on the server</body>
+            </html>
+        )
     )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -300,11 +301,12 @@ http.createServer(function (req, res) {
                 <head>
                     <title>Hello World</title>
                 </head>
-            <body>
-                index.jsx, automatically processed through gulp and gulp-react,
-                with node automatically restarted through gulp-nodemon!
-            </body>
-        </html>)
+                <body>
+                    index.jsx, automatically processed through gulp and gulp-react,
+                    with node automatically restarted through gulp-nodemon!
+                </body>
+            </html>
+        )
     )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -344,19 +346,92 @@ http.createServer(function (req, res) {
                 <head>
                     <title>Hello World</title>
                 </head>
-            <body>
-                <HelloWorld />
-                <div>
-                    Rendered from the Server!
-                </div>
-            </body>
-        </html>)
+                <body>
+                    <HelloWorld />
+                    <div>
+                        Rendered from the Server!
+                    </div>
+                </body>
+            </html>
+        )
     )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
 
 Notice that in the `require` statement, we omit the file extension--the .js extension will be used automatically.  It's noteworthy that we've created the component as `Components/HelloWorld.jsx` but it will get transformed into `lib/Components/HelloWorld.js`.  Likewise, even though we're writing code in `index.jsx`, it will be running from `lib/index.js` where its relative path reference to `./Components/HelloWorld` will result in finding `lib/Components/HelloWorld.js`.  At first, I thought there would be some gymnastics or inconsistencies surfacing here, but since `require` assumes the `.js` file extension, it comes together pretty cleanly.
+
+### Passing State to Components
+Let's pass some state to the HelloWorld component now!
+
+In `index.jsx`, we'll simply add an attribute to the `<HelloWorld>` tag.
+
+``` jsx
+var http = require('http')
+  , React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    res.end(
+        React.renderToString(
+            <html>
+                <head>
+                    <title>Hello World</title>
+                </head>
+                <body>
+                    <HelloWorld from="index.jsx on the server" />
+                </body>
+            </html>
+        )
+    )
+}).listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Within the `Components/HelloWorld.jsx`, we'll make use of that `from` property.
+
+``` jsx
+var React = require('react')
+
+module.exports = React.createClass({
+    render: function() {
+        return (
+            <div>
+                <div>
+                    This is from the HelloWorld.jsx component's render function.
+                </div>
+                <div>
+                    Rendered from: {this.props.from}
+                </div>
+            </div>
+        )
+    }
+})
+```
+
+There's a noteworthy React/JSX tip to talk about here: Parse Errror: "Adjacent JSX elements must be wrapped in an enclosing tag."
+
+In the `HelloWorld.jsx` file, I initially used the following code, and it resulted in this Adjacent JSX elements error.
+
+``` jsx
+var React = require('react')
+
+module.exports = React.createClass({
+    render: function() {
+        return (
+            <div>
+                This is from the HelloWorld.jsx component's render function.
+            </div>
+            <div>
+                Rendered from: {this.props.from}
+            </div>
+        )
+    }
+})
+```
+
+It took a few minutes to understand, but what was happening is the HelloWorld.jsx file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
 
 
 ## References

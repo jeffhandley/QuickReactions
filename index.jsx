@@ -10,13 +10,10 @@ http.createServer(function (req, res) {
                 <head>
                     <title>Hello World</title>
                 </head>
-            <body>
-                <HelloWorld />
-                <div>
-                    Rendered from the Server!
-                </div>
-            </body>
-        </html>)
-    )
+                <body>
+                    <HelloWorld from="index.jsx on the server"></HelloWorld>
+                </body>
+            </html>
+    ))
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')

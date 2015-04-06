@@ -4,7 +4,12 @@ module.exports = React.createClass({
     render: function() {
         return (
             <div>
-                This is from the HelloWorld.jsx component's render function.
+                <div>
+                    This is from the HelloWorld.jsx component's render function.
+                </div>
+                <div>
+                    Rendered from: {this.props.from}
+                </div>
             </div>
         )
     }
