@@ -361,8 +361,8 @@ console.log('Server running at http://localhost:1337/')
 
 Notice that in the `require` statement, we omit the file extension--the .js extension will be used automatically.  It's noteworthy that we've created the component as `Components/HelloWorld.jsx` but it will get transformed into `lib/Components/HelloWorld.js`.  Likewise, even though we're writing code in `index.jsx`, it will be running from `lib/index.js` where its relative path reference to `./Components/HelloWorld` will result in finding `lib/Components/HelloWorld.js`.  At first, I thought there would be some gymnastics or inconsistencies surfacing here, but since `require` assumes the `.js` file extension, it comes together pretty cleanly.
 
-### Passing State to Components
-Let's pass some state to the HelloWorld component now!
+### Passing Properties to Components
+Let's pass some properties to the HelloWorld component now!
 
 In `index.jsx`, we'll simply add an attribute to the `<HelloWorld>` tag.
 
