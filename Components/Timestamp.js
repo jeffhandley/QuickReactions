@@ -1,12 +1,5 @@
 var Timestamp = React.createClass({
     render: function() {
-        return React.createElement("div", null, this.props.date)
+        return React.createElement("div", null, new Date().toString())
     }
-})
-
-setInterval(function() {
-    React.render(
-        Timestamp({ date: new Date() }),
-        document.getElementById('reactContainer')),
-    500)
 })

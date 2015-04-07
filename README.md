@@ -438,8 +438,85 @@ On the server, we now have JSX automatically transforming into JS files, and we'
 
 React on the client is where many tutorials start out; this was backwards from my own needs where server rendering was more critical and client rendering was an added bonus.  While our end result will involve rendering the same component on the server and client, we'll start out by rendering server and client components separately to make sure we understand each concept in isolation before combining them.
 
-Just like we did on the server, we'll start off using React on the client *without* the JSX syntax.
+Just like we did on the server, we'll start off using React on the client *without* the JSX syntax.  We'll first create a new file at `Components/Timestamp.js` with the following code.
 
+``` js
+var Timestamp = React.createClass({
+    render: function() {
+        return React.createElement("div", null, new Date().toString())
+    }
+})
+```
+
+This will serve as the foundation for our Timestamp component; we'll render this script inline within our HTML to start out.  To do that, we'll add the inline script to the response we're emitting from Node by editing the `index.jsx` file as follows.
+
+``` jsx
+var http = require('http')
+  , React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , fs = require('fs')
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var body = React.renderToString(
+                <body>
+                    <HelloWorld from="index.jsx on the server"></HelloWorld>
+                    <div id="reactContainer" />
+                </body>)
+
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+                '</head>' +
+                '<script>' +
+                fs.readFileSync('./Components/Timestamp.js') +
+                '</script>' +
+                body +
+                '</html>'
+        )
+
+}).listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+You might be wondering why we're not just referencing Timestamp.js through a `<script src="/Components/Timestamp.js"></script>` tag.  That's because we don't have any routing in place--all requests, regardless of URL, are getting the same response.  Don't worry though, we'll introduce some routing soon enough so that this file can get served up separately.
+
+Okay, if you load the page with this in place you should see the inline JavaScript, but we're not doing anything with it yet.  Let's render this component using `React.render`.
+
+``` jsx
+var http = require('http')
+  , React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , fs = require('fs')
+
+http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var body = React.renderToString(
+                <body>
+                    <HelloWorld from="index.jsx on the server"></HelloWorld>
+                    <div id="reactContainer" />
+                </body>)
+
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+                '</head>' +
+                '<script>' +
+                fs.readFileSync('./Components/Timestamp.js') +
+                '</script>' +
+                body +
+                '<script>' +
+                'var timestampInstance = React.createFactory(Timestamp);' +
+                'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
+                '</script>' +
+                '</html>'
+        )
+
+}).listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+There are a few things to note here:
+
+1. The script for rendering the component needs to be below the rest of the body of the page so that the "reactContainer" element exists.
+1. We are using `React.createFactory(Timestamp)()` to get an instance of our component. Without this approach, React warns us about using components directly--using either JSX or a factory is what is suggested.
+1. We are forcing the re-rendering of the component within our interval--we should instead use the component's state and just update its state to let React handle rendering.
 
 ## References
 
