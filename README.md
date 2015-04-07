@@ -433,6 +433,13 @@ module.exports = React.createClass({
 
 It took a few minutes to understand, but what was happening is the HelloWorld.jsx file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
 
+### React on the Client
+On the server, we now have JSX automatically transforming into JS files, and we're using React to render a container page that uses a component, passing state into that component.  Now it's time to introduce React on the client!
+
+React on the client is where many tutorials start out; this was backwards from my own needs where server rendering was more critical and client rendering was an added bonus.  While our end result will involve rendering the same component on the server and client, we'll start out by rendering server and client components separately to make sure we understand each concept in isolation before combining them.
+
+Just like we did on the server, we'll start off using React on the client *without* the JSX syntax.
+
 
 ## References
 
