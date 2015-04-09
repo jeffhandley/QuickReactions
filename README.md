@@ -10,8 +10,8 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Use Gulp to improve the development workflow
 1. Extract a React.js component from the code and render it on the server
 1. Introduce a client-side React.js component (without JSX) to render on the page
-1. Refactor the client-side component to use JSX
-1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
+1. [TODO] *Refactor the client-side component to use JSX*
+1. [TODO] *Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page*
 
 Let's get started!
 
