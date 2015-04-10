@@ -29,6 +29,7 @@
     "gulp-watch": "^4.2.3"
   },
   "dependencies": {
+    "express": "^4.12.3",
     "react": "^0.13.1"
   }
 }

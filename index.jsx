@@ -1,9 +1,12 @@
-var http = require('http')
-  , React = require('react')
+var React = require('react')
   , HelloWorld = require('./Components/HelloWorld')
-  , fs = require('fs')
+  , express = require('express')
+  , path = require('path')
 
-http.createServer(function (req, res) {
+var app = express()
+app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+
+app.get('/', function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
     var body = React.renderToString(
                 <body>
@@ -12,10 +15,8 @@ http.createServer(function (req, res) {
                 </body>)
 
         res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+                '<script src="/Components/Timestamp.js"></script>' +
                 '</head>' +
-                '<script>' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '</script>' +
                 body +
                 '<script>' +
                 'var timestampInstance = React.createFactory(Timestamp)();' +
@@ -24,6 +25,7 @@ http.createServer(function (req, res) {
                 '</script>' +
                 '</html>'
         )
+})
 
-}).listen(1337)
+app.listen(1337)
 console.log('Server running at http://localhost:1337/')

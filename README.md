@@ -577,6 +577,55 @@ console.log('Server running at http://localhost:1337/')
 
 Running the page now, you'll see the "Initial State" message for a 1/2 second and then it will change to "Updated through setState" and the timestamp will continue updating.  We are now updating the client-side component's state and React is automatically re-rendering the component for us.  Yay!
 
+### Some Basic Routing
+Okay, I've had enough of the HTML string building.  Let's get some basic routing in on the server so that we can serve files instead.  We'll use **Express** for that.
+
+1. npm install express -save
+
+With Express installed, we can now get rid of our raw **http** code, spin up an Express server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `<script src="..."></script>` tag to get our Timestamp.js file down to the browser.  Here's what `index.jsx` looks like after those transformations.
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var body = React.renderToString(
+                <body>
+                    <HelloWorld from="index.jsx on the server"></HelloWorld>
+                    <div id="reactContainer" />
+                </body>)
+
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+                '<script src="/Components/Timestamp.js"></script>' +
+                '</head>' +
+                body +
+                '<script>' +
+                'var timestampInstance = React.createFactory(Timestamp)();' +
+                'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
+                'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
+                '</script>' +
+                '</html>'
+        )
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Notes:
+
+* The `express.static` call is using `__dirname`, joined with `..`, and then joined with `Components`
+* This is because the *running* code is `/lib/index.js` and not the `/index.jsx`, so we have to correct the paths
+* Additionally, we're serving the static components to the browser to a `/Components` folder
+
+We're also obviously not yet rid of the HTML string building--let's do that now.
+
 ## References
 
 Here are some of the other samples and posts I referenced along the way.
@@ -589,3 +638,4 @@ Here are some of the other samples and posts I referenced along the way.
 1. [https://www.npmjs.com/package/react-tools](https://www.npmjs.com/package/react-tools)
 1. [http://www.sitepoint.com/getting-started-react-jsx/](http://www.sitepoint.com/getting-started-react-jsx/)
 1. [http://www.smashingmagazine.com/2014/06/11/building-with-gulp/](http://www.smashingmagazine.com/2014/06/11/building-with-gulp/)
+1. [https://github.com/rackt/react-router-mega-demo](https://github.com/rackt/react-router-mega-demo)
