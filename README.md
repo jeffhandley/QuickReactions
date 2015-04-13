@@ -626,6 +626,114 @@ Notes:
 
 We're also obviously not yet rid of the HTML string building--let's do that now.
 
+### Cleaner Server Rendering
+
+My first attempt to clean up the server rendering resulted in the following `index.jsx` file.  **But be warned: *this didn't work* **
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var elementCode = 'var timestampElement = React.render(timestampInstance, document.getElementById(\'reactContainer\'))'
+    var html = React.renderToString(
+                <html>
+                    <head>
+                        <title>Hello World</title>
+                        <script src="//fb.me/react-0.13.1.js"></script>
+                        <script src="/Components/Timestamp.js"></script>
+                    </head>
+                    <body>
+                        <HelloWorld from="index.jsx on the server"></HelloWorld>
+                        <div id="reactContainer" />
+                    </body>
+                    <script>
+                        var timestampInstance = React.createFactory(Timestamp)();
+                        var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
+                        setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
+                    </script>
+                </html>)
+
+        res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Trying to run this results in a broken page and an error visible on the console:
+
+`ReferenceError: timestampElement is not defined`
+
+This confused me for a while, but after some investigation (removing some of the inline script and building it back up), I found that the JSX parser is trying to process the contents of the `<script>` tag.  When the `setInterval` statement is evaluated, the `{ timestampElement.setState...` is actually processed on the server!
+
+Additionally, I saw that the `document.getElementById("reactContainer")` statement's quotes were also getting escaped by the rendering, and I couldn't find a straight-forward day to address that.
+
+Ugh - so I've now learned that combining inline `<script>` tags and JSX is not a good recipe.  We'll need a different approach.  We'll go with a simple solution for the moment and just extract that code out into a separate JS file--one specifically for this page.
+
+Let's create a top-level `assets` folder and create this file as `assets/index.js`.
+
+``` js
+var timestampInstance = React.createFactory(Timestamp)();
+var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
+setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
+```
+
+Then we'll update our `index.jsx` file for Express to also serve static assets from our `assets` folder, and then we'll change our inline `<script>` tag over to `<script src="/assets/index.js"></script>`.
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var html = React.renderToString(
+                <html>
+                    <head>
+                        <title>Hello World</title>
+                        <script src="//fb.me/react-0.13.1.js"></script>
+                        <script src="/Components/Timestamp.js"></script>
+                    </head>
+                    <body>
+                        <HelloWorld from="index.jsx on the server"></HelloWorld>
+                        <div id="reactContainer" />
+                    </body>
+                    <script src="/assets/index.js"></script>
+                </html>)
+
+        res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Now the page is working again!
+
+### JSX for Client Components
+All of that routing business was a bit of a diversion from our task at hand: **Refactor the client-side component to use JSX**
+
+I know that there are 2 ways we can use JSX on the client:
+
+1. Send JSX down to the browser and use React's `JSXTransformer.js` to transform it to JS on the client
+1. Transform the JSX on the server and serve raw JS to the client
+
+Since the [ReactJS Starter Kit](http://facebook.github.io/react/docs/getting-started.html#starter-kit) demonstrates the first option, transforming JSX on the client, we'll start with that approach.
+
+Before we convert `Timestamp.js` over to use JSX, let's introduce the JSX Transformer and ensure that the page still works as-is.
+
 ## References
 
 Here are some of the other samples and posts I referenced along the way.
