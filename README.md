@@ -10,7 +10,7 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Use Gulp to improve the development workflow
 1. Extract a React.js component from the code and render it on the server
 1. Introduce a client-side React.js component (without JSX) to render on the page
-1. [TODO] *Refactor the client-side component to use JSX*
+1. Refactor the client-side component to use JSX
 1. [TODO] *Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page*
 
 Let's get started!
@@ -732,7 +732,158 @@ I know that there are 2 ways we can use JSX on the client:
 
 Since the [ReactJS Starter Kit](http://facebook.github.io/react/docs/getting-started.html#starter-kit) demonstrates the first option, transforming JSX on the client, we'll start with that approach.
 
-Before we convert `Timestamp.js` over to use JSX, let's introduce the JSX Transformer and ensure that the page still works as-is.
+Before we convert `Timestamp.js` over to use JSX, let's introduce the JSX Transformer and ensure that the page still works as-is.  Here's the change to `index.jsx`.
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var html = React.renderToString(
+                <html>
+                    <head>
+                        <title>Hello World</title>
+                        <script src="//fb.me/react-0.13.1.js"></script>
+                        <script src="//fb.me/JSXTransformer-0.13.1.js"></script>
+                        <script src="/Components/Timestamp.js" type="text/jsx"></script>
+                    </head>
+                    <body>
+                        <HelloWorld from="index.jsx on the server"></HelloWorld>
+                        <div id="reactContainer" />
+                    </body>
+                    <script src="/assets/index.js"></script>
+                </html>)
+
+        res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+If we run this, there's an error in the browser: `Uncaught ReferenceError: Timestamp is not defined`
+
+Thinking about what's going on here, we can figure out why this is happening:
+
+1. The React library is served
+1. The JSXTransformer library is served
+1. The `/Components/Timestamp.js` file is served, as text/jsx, which queues it up for processing by the JSXTransformer
+1. The `/assets/index.js` file is served and executed
+
+There's our problem: The code in `/assets/index.js` is getting executed, but the JSXTransformer hasn't yet had an opportunity to process the `/Components/Timestamp.js` file.  There's an easy fix though: Let's just change the `/assets/index.js` script over to also be `text/jsx` so that the JSXTransformer will be responsible for executing that code, and it will do so after executing the `/Components/Timestamp.js` code.
+
+``` js
+<script src="/assets/index.js" type="text/jsx"></script>
+```
+
+That did the trick.  The page is working again.  While verifying this, I noticed a warning in the browser console though.
+
+`You are using the in-browser JSX transformer. Be sure to precompile your JSX for production - http://facebook.github.io/react/docs/tooling-integration.html#jsx`
+
+Okay, my gut was right--we'll want to do this transform on the server at the end of the day.  But let's finish the conversion over to JSX first.
+
+After renaming `/Components/Timestamp.js` to `/Components/Timestamp.jsx`, its code gets changed to the following:
+
+``` jsx
+var Timestamp = React.createClass({
+    getInitialState: function() {
+        return { date: "Initial State: " + new Date().toString() }
+    },
+    render: function() {
+        return <div>{this.state.date}</div>
+    }
+})
+```
+
+That was only a 1-line change for this component; not bad.  We'll change our `index.jsx` file to reference it as `/Components/Timestamp.jsx` now and see if the JSXTransformer does its job...
+
+**It did!** Refreshing the page, we see that it's still functioning just like it was before.  Huh.  That was pretty anti-climactic, wasn't it?  Viewing source, just to make sure the change actually took effect, we can see that sure enough, the following was rendered:
+
+``` js
+<script src="//fb.me/react-0.13.1.js" data-reactid=".23it8p7ku0w.0.1"></script>
+<script src="//fb.me/JSXTransformer-0.13.1.js" data-reactid=".23it8p7ku0w.0.2"></script>
+<script src="/Components/Timestamp.jsx" type="text/jsx" data-reactid=".23it8p7ku0w.0.3"></script>
+```
+
+Following the link to `/Components/Timestamp.jsx`, we also get confirmation that we sent actual JSX code down to the browser and the JSXTransformer component processed it like magic.
+
+## Server-Side Processing of the JSX for Client Use
+We should go ahead and follow the warning's guidance though, and convert over to the other approach: Let's conver the JSX to JS on the server (as part of our build process), and get back to serving it as raw JavaScript instead of JSX.
+
+If you were watching closely when you renamed `/Components/Timestamp.js` to `/Components/Timestamp.jsx`, you might have noticed that Gulp *already* did this work for us and `/lib/Components/Timestamp.js` showed up automatically!
+
+This happened because of the "jsx" and "watch-jsx" Gulp tasks that we configured earlier:
+
+``` js
+gulp.task('watch-jsx', ['jsx'], function() {
+    gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
+        gulp.start('jsx')
+    })
+})
+
+gulp.task('jsx', function() {
+    return gulp.src('**/*.jsx')
+               .pipe(gulpReact())
+               .pipe(gulp.dest('lib'))
+})
+```
+
+So in order to get to where we're using JSX components in the browser, but as raw JavaScript, we don't have much to do.
+
+1. Serve components from the `/lib/Components` folder instead of the `/Components` folder
+1. Change the `<script>` tag back to `/Components/Timestamp.js`
+1. Remove the `text/jsx` script types
+1. Remove the JSXTransformer script tag too
+
+Here's what `index.jsx` looks like after those changes.
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/Components', express.static(path.join(__dirname, 'Components')))
+app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var html = React.renderToString(
+                <html>
+                    <head>
+                        <title>Hello World</title>
+                        <script src="//fb.me/react-0.13.1.js"></script>
+                        <script src="/Components/Timestamp.js"></script>
+                    </head>
+                    <body>
+                        <HelloWorld from="index.jsx on the server"></HelloWorld>
+                        <div id="reactContainer" />
+                    </body>
+                    <script src="/assets/index.js"></script>
+                </html>)
+
+        res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Reloading the page, we see that everything is still working.  But viewing source, we discover that we're once again loading `/Components/Timestamp.js` and that its code is served in raw JavaScript instead of JSX, even though we're maintaining it in JSX.
+
+We've successfully refactored the project to allow us to:
+
+1. Serve static files from the server to the client through Express routing
+1. Edit a client-side React Component using JSX syntax, but serve it to the browser as JavaScript
+1. Load that client-side react Component into our page, set its state on a timer, and watch React re-render
 
 ## References
 
