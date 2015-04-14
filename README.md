@@ -1139,6 +1139,7 @@ I'll admit, this was a lot of work--more than I expected it to be.  And I'm not 
 ```
     /assets     - meant for public js/css/image assets
                 - now it's a source folder for JavaScript files to be run through Browserify
+                - files have to know to use relative path require() statements to get to ../lib
     /Components - JSX-based React components
                 - also a source folder where contents will be run through gulp-react
     /lib        - build output from Browserify and gulp-react
