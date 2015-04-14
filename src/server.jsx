@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
                         <title>Hello World</title>
                     </head>
                     <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
+                        <HelloWorld from="server.jsx, running on the server"></HelloWorld>
                         <div id="reactContainer" />
                         <div id="reactHelloContainer"></div>
                     </body>

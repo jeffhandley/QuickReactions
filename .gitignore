@@ -27,4 +27,4 @@ build/Release
 node_modules
 
 # Where we compile our JSX files into JS files for the server
-lib
+bin

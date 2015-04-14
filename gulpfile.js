@@ -6,7 +6,7 @@ var gulp = require('gulp')
   , browserify = require('browserify')
 
 gulp.task('watch-jsx', ['build'], function() {
-    gulpWatch('src/**/*.jsx', { ignored: 'lib/' }, function() {
+    gulpWatch('src/**/*.jsx', function() {
         gulp.start('build')
     })
 })
@@ -14,20 +14,20 @@ gulp.task('watch-jsx', ['build'], function() {
 gulp.task('jsx', function() {
     return gulp.src('src/**/*.jsx')
                .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+               .pipe(gulp.dest('bin'))
 })
 
 gulp.task('build', ['client-scripts'])
 
 gulp.task('client-scripts', ['jsx'], function() {
-  return browserify('./lib/Pages/index.js').bundle()
+  return browserify('./bin/Pages/index.js').bundle()
     .pipe(source('index.js'))
-    .pipe(gulp.dest('lib/Pages'))
+    .pipe(gulp.dest('bin/Pages'))
 })
 
 gulp.task('node', ['client-scripts', 'watch-jsx'], function() {
     gulpNodemon({
-        script: 'lib/server.js',
+        script: 'bin/server.js',
         ignore: ['gulpfile.js'],
         ext: 'js jsx'
     })
