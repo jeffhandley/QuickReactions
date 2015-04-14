@@ -23,10 +23,12 @@
   },
   "homepage": "https://github.com/jeffhandley/QuickReactions",
   "devDependencies": {
+    "browserify": "^9.0.8",
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.2",
     "gulp-react": "^3.0.1",
-    "gulp-watch": "^4.2.3"
+    "gulp-watch": "^4.2.3",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "express": "^4.12.3",

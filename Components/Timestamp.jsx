@@ -1,4 +1,6 @@
-var Timestamp = React.createClass({
+var React = require('react')
+
+module.exports = React.createClass({
     getInitialState: function() {
         return { date: "Initial State: " + new Date().toString() }
     },
