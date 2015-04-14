@@ -1,6 +1,6 @@
 var React = require('react')
-var HelloWorld = require('../lib/Components/HelloWorld')
-var Timestamp = require('../lib/Components/Timestamp')
+var HelloWorld = require('../Components/HelloWorld')
+var Timestamp = require('../Components/Timestamp')
 
 var timestampInstance = React.createFactory(Timestamp)();
 var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
