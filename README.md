@@ -1340,6 +1340,8 @@ We can see that the HelloWorld component clearly contained the "server.jsx, runn
 
 *This is now an isomorphic app!*
 
+For one last illustration to see that this is working, you can disable JavaScript (Chrome's developer tools has a handy checkbox for that), refresh the page, and see only the server-rendered HelloWorld message.  The Timestamp won't render and the HelloWorld message won't change to the client's message.
+
 ## References
 
 Here are some of the other samples and posts I referenced along the way.
