@@ -1230,7 +1230,34 @@ And then in `/src/Pages/index.jsx`, we'll make a change to the message it passes
 var helloInstance = React.createFactory(HelloWorld)( { from: "index.jsx, transformed and running on the client" } );
 ```
 
+## JSX for the Pages
+With this restructuring in place, and with Browserify building `/src/Pages/index.jsx`, it seems natural to use JSX for that file too.  Looking at `gulpfile.js` again, we can see that file is going through the following stages:
 
+1. Source file at `/src/Pages/index.jsx`
+1. The 'jsx' task transforms it and writes the output to `/bin/Pages/index.js`
+1. The 'client-scripts' task runs Browserify on `/bin/Pages/index.js` and overwrites that file with the output
+
+For clear illustration of this, we can temporarily update `gulpfile.js` so that the output of the 'client-scripts' task goes to `/bin/Pages/bundles'.  We can then see that the intermediate output is written to `/bin/Pages/index.js' and the bundled output goes to `/bin/Pages/bundles/index.js`.  Now that we get that, we can revert the change though.
+
+Since `/src/Pages/index.jsx` is going through the JSX transform though, let's go ahead and use JSX for it.
+
+``` jsx
+var React = require('react')
+var HelloWorld = require('../Components/HelloWorld')
+var Timestamp = require('../Components/Timestamp')
+
+React.render(
+    <HelloWorld from='index.jsx, transformed and running on the client' />,
+    document.getElementById('reactHelloContainer'))
+
+var timestampElement = React.render(
+    <Timestamp />,
+    document.getElementById('reactContainer'))
+
+setInterval(function() {
+    timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) },
+    500)
+```
 
 ## References
 
