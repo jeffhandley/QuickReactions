@@ -11,7 +11,7 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Extract a React.js component from the code and render it on the server
 1. Introduce a client-side React.js component (without JSX) to render on the page
 1. Refactor the client-side component to use JSX
-1. [TODO] *Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page*
+1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
 
 Let's get started!
 
@@ -1247,7 +1247,7 @@ var HelloWorld = require('../Components/HelloWorld')
 var Timestamp = require('../Components/Timestamp')
 
 React.render(
-    <HelloWorld from='index.jsx, transformed and running on the client' />,
+    <HelloWorld from='index.jsx, transformed, bundled, and running on the client' />,
     document.getElementById('reactHelloContainer'))
 
 var timestampElement = React.render(
@@ -1258,6 +1258,87 @@ setInterval(function() {
     timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) },
     500)
 ```
+
+Just to make sure this actually worked, the `<HelloWorld>` message was changed slightly. But yeah, this worked like a charm!
+
+## Going Isomorphic
+
+> isomorphic
+>
+> ADJECTIVE
+> corresponding or similar in form and relations.
+
+With React apps, people have been using the term 'isomorphic' to describe applications that:
+
+1. Render pages and components on the server, routing requests to the right views
+1. After page load, the browser creates the same components and takes over rendering and routing thereafter
+
+React makes this approach really efficient because it puts checksums on DOM elements and when the client rendering is performed, any elements that have the same content as what the server generated will not be re-rendered in the DOM.
+
+Getting to isomorphic behavior was the goal of this project; let's see if we can do it now.  We are already rendering the `<HelloWorld>` component on the server and separately on the client.  Instead of having two instances on the page, we'll combine them and achieve the isomorphic goal.
+
+When the client calls `React.render()`, we need to give it the container element.  For our client-side rendering of HelloWorld, we were using the `<div id="reactHelloContainer">` element.  Let's just move our server-side rendering of HelloWorld into that container, and then the client-side rendering should take it over.
+
+``` jsx
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/pages', express.static(path.join(__dirname, 'Pages')))
+
+app.get('/', function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'})
+    var html = React.renderToString(
+                <html>
+                    <head>
+                        <title>Hello World</title>
+                    </head>
+                    <body>
+                        <div id="reactContainer" />
+                        <div id="reactHelloContainer">
+                            <HelloWorld from="server.jsx, running on the server"></HelloWorld>
+                        </div>
+                    </body>
+                    <script src="/pages/index.js"></script>
+                </html>)
+
+        res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
+```
+
+Running the page at this point, we'll see that we now have a single Timestamp element with a single HelloWorld component under that.  The Timestamp element refreshes every second and we can still see its initial flicker.  But for the HelloWorld component, we only see its client-side result without ever seeing the server's message.  So, did it work?
+
+Well, the test for that is easy: **View Source**.
+
+``` html
+<html data-reactid=".1hcyssffzeo" data-react-checksum="1801386867">
+    <head data-reactid=".1hcyssffzeo.0">
+        <title data-reactid=".1hcyssffzeo.0.0">Hello World</title>
+    </head>
+    <body data-reactid=".1hcyssffzeo.1">
+        <div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"></div>
+        <div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1">
+            <div data-reactid=".1hcyssffzeo.1.1.0">
+                <div data-reactid=".1hcyssffzeo.1.1.0.0">This is from the HelloWorld.jsx component&#x27;s render function.</div>
+                <div data-reactid=".1hcyssffzeo.1.1.0.1">
+                    <span data-reactid=".1hcyssffzeo.1.1.0.1.0">Rendered from: </span>
+                    <span data-reactid=".1hcyssffzeo.1.1.0.1.1">server.jsx, running on the server</span>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/pages/index.js" data-reactid=".1hcyssffzeo.2"></script>
+</html>
+```
+
+We can see that the HelloWorld component clearly contained the "server.jsx, running on the server" message.  But then when the `/pages/index.js` script ran, the component was re-rendered with the result of the client component.  Sweet!
+
+*This is now an isomorphic app!*
 
 ## References
 
