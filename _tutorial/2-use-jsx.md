@@ -68,3 +68,5 @@ If you view source in the browser, you'll see something like the following.
     <body data-reactid=".qa6th1tqf4.1">index.jsx compiled into index.js by hand on the server</body>
 </html>
 ```
+
+[Next » Use Gulp to improve the development workflow](3-gulp-workflow)
