@@ -19,7 +19,7 @@ a {
   display: inline-block;
   margin-bottom: 1rem;
   color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(20, 20, 20, 0.6);
   border-color: rgba(255, 255, 255, 0.2);
   border-style: solid;
   border-width: 1px;
@@ -53,15 +53,24 @@ a {
       margin-top: 1rem;
       margin-left: 0; } }
 
+.step-page .page-header .btn {
+  display: none; }
+
 .page-header {
   color: #fff;
   text-align: center;
-  background-color: #159957;
-  background-image: linear-gradient(120deg, #155799, #159957); }
+  background-image: url("../images/dark-metal-texture.jpg");
+  background-color: #202020; }
 
 .project-name {
   margin-top: 0;
   margin-bottom: 0.1rem; }
+
+.project-name a {
+  color: #fff; }
+
+.project-name a:hover {
+  text-decoration: none; }
 
 @media screen and (min-width: 64em) {
   .project-name {
@@ -74,6 +83,9 @@ a {
 @media screen and (max-width: 42em) {
   .project-name {
     font-size: 1.75rem; } }
+
+.step-page .project-name {
+  font-size: 1.75rem; }
 
 .project-tagline {
   font-weight: normal;
@@ -90,6 +102,27 @@ a {
 @media screen and (max-width: 42em) {
   .project-tagline {
     font-size: 1rem; } }
+
+.step-page .project-tagline {
+  font-size: 1rem;
+  margin-top: 0;
+  padding-bottom: 0.5rem; }
+
+aside {
+  float: right;
+  width: 12rem;
+  margin-top: 1rem;
+}
+
+a.asideheader::before {
+  content: "» ";
+  margin-left: -1.3ex;
+}
+
+aside ol {
+  padding-left: 0;
+  margin-top: 0;
+}
 
 .main-content :first-child {
   margin-top: 0; }
@@ -198,7 +231,7 @@ a {
     font-size: 1.1rem; }
   .site-footer {
     max-width: 100rem;
-    padding: 1rem 10rem;
+    padding: 1rem 16rem 2rem 10rem;
     margin: 0 auto;
     font-size: 1rem; } }
 
@@ -215,6 +248,8 @@ a {
     font-size: 1rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
+  aside {
+    display: none; }
   .main-content {
     padding: 2rem 4rem;
     font-size: 1.1rem; }
@@ -223,12 +258,17 @@ a {
     font-size: 1rem; }}
 
 @media screen and (max-width: 42em) {
+  aside {
+    display: none; }
   .main-content {
     padding: 2rem 1rem;
     font-size: 1rem; }
   .site-footer {
     padding: 1rem 1rem;
     font-size: 0.9rem ;}}
+
+.main-content .step-title {
+  margin-left: -2ex; }
 
 .site-footer {
   border-top: solid 1px #eff0f1; }

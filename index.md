@@ -8,7 +8,7 @@ While working through sample after sample for Node.js and React.js, I experience
 I wanted to learn by starting truly from scratch and building the app up in logical, incremental steps. This tutorial uses the following approach:
 
 1. Create a Hello World web server in Node.js
-1. Introduce server-side React.js JSX compilation to use React.js on the server
+1. Use React's JSX syntax to define component content
 1. Use Gulp to improve the development workflow
 1. Extract a React.js component from the code and render it on the server
 1. Introduce a client-side React.js component (without JSX) to render on the page
@@ -17,4 +17,4 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 
 Let's get started by getting Node.js serving a "Hello World" page.
 
-[» Create a Hello World web server in Node.js](1-node-helloworld)
+[Begin » Create a Hello World web server in Node.js](1-node-helloworld.html)

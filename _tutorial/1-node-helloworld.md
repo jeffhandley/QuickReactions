@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Create a Hello World web server in Node.js
-slug: 1-node-helloworld
+title: Hello World in Node.js
+step: 1
 ---
 For this step, you first need to follow the instructions found at [nodejs.org](https://nodejs.org) to get Node working on your machine.  After that, there's not much to do for getting Hello World working.
 
@@ -13,7 +13,7 @@ For this step, you first need to follow the instructions found at [nodejs.org](h
 ## Get Node to emit Hello World with hard-coded HTML
 Create `index.js` using the example webserver code from [https://nodejs.org](https://nodejs.org/).
 
-```js
+``` js
 var http = require('http')
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
@@ -21,3 +21,5 @@ http.createServer(function (req, res) {
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
+
+[Next » Use React's JSX syntax to define component content](2-use-jsx.html)
