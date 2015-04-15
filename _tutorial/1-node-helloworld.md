@@ -13,7 +13,7 @@ For this step, you first need to follow the instructions found at [nodejs.org](h
 ## Get Node to emit Hello World with hard-coded HTML
 Create `index.js` using the example webserver code from [https://nodejs.org](https://nodejs.org/).
 
-``` js
+```js
 var http = require('http')
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
