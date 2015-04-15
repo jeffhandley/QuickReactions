@@ -1,0 +1,5 @@
+collections:
+  tutorial:
+    output: true
+    permalink: /:path.html
+highlighter: pygments
