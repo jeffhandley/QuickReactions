@@ -13,13 +13,13 @@ For this step, you first need to follow the instructions found at [nodejs.org](h
 ## Get Node to emit Hello World with hard-coded HTML
 Create `index.js` using the example webserver code from [https://nodejs.org](https://nodejs.org/).
 
-``` js
-var http = require('http')
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end('<html><head><title>Hello World</title></head><body>index.js on the server</body></html>')
-}).listen(1337)
-console.log('Server running at http://localhost:1337/')
-```
+<pre class="brush: js">
+    var http = require('http')
+    http.createServer(function (req, res) {
+        res.writeHead(200, {'Content-Type': 'text/html'})
+        res.end('<html><head><title>Hello World</title></head><body>index.js on the server</body></html>')
+    }).listen(1337)
+    console.log('Server running at http://localhost:1337/')
+</pre>
 
 [Next » Use React's JSX syntax to define component content](2-use-jsx.html)
