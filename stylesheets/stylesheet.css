@@ -54,7 +54,9 @@ a {
       margin-left: 0; } }
 
 .step-page .page-header .btn {
-  display: none; }
+  transform: scale(0.75, 0.75);
+  margin-bottom: 0;
+  padding: 0.5rem 0.75rem; }
 
 .page-header {
   color: #fff;
@@ -106,7 +108,8 @@ a {
 .step-page .project-tagline {
   font-size: 1rem;
   margin-top: 0;
-  padding-bottom: 0.5rem; }
+  margin-bottom: 0;
+  padding-bottom: 0; }
 
 aside {
   float: right;
@@ -279,4 +282,3 @@ aside ol {
 
 .site-footer-credits {
   color: #819198; }
-
