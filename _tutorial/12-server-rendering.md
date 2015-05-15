@@ -19,7 +19,10 @@ app.use('/Components', express.static(path.join(path.join(__dirname, '..'),
 
 app.get('/', function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
-  var elementCode = 'var timestampElement = React.render(timestampInstance, document.getElementById(\'reactContainer\'))'
+
+  var elementCode = 'var timestampElement = React.render(
+    timestampInstance, document.getElementById(\'reactContainer\'))'
+
   var html = React.renderToString(
     &lt;html&gt;
       &lt;head&gt;
@@ -33,7 +36,10 @@ app.get('/', function (req, res) {
       &lt;/body&gt;
       &lt;script&gt;
       var timestampInstance = React.createFactory(Timestamp)();
-      var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
+
+      var timestampElement = React.render(timestampInstance,
+        document.getElementById("reactContainer"));
+
       setInterval(function() { timestampElement.setState({
         date: "Updated through setState: " + new Date().toString() }) }, 500)
       &lt;/script&gt;
