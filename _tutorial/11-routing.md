@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Some Basic Routing
+title: Basic Routing
 step: 11
 ---
 Okay, I've had enough of the HTML string building.  Let's get some basic routing in on the server so that we can serve files instead.  We'll use `Express` for that.
@@ -50,3 +50,5 @@ Notes:
 1. Additionally, we're serving the static components to the browser to a `/Components` folder
 
 We're also obviously not yet rid of the HTML string building--let's do that now.
+
+[Next » Adding Basic Routing](11-routing-basic)

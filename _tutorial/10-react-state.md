@@ -61,4 +61,4 @@ console.log('Server running at http://localhost:1337/')
 
 Running the page now, you'll see the "Initial State" message for a 1/2 second and then it will change to "Updated through setState" and the timestamp will continue updating.  We are now updating the client-side component's state and React is automatically re-rendering the component for us.  **Yay!**
 
-[Next » Introducing Some Routing](11-routing)
+[Next » Adding Basic Routing](11-routing)

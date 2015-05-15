@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Completing the Gulp Workflow
+title: Complete Gulp Workflow
 step: 6
 ---
 To bring this all together, we need to get Gulp to watch our `index.jsx` file and call our `jsx` task whenever the file is touched. Then we run Gulp once and freely edit the `index.jsx` file and have the changes pick up automatically.
@@ -61,4 +61,4 @@ http.createServer(function (req, res) {
 console.log('Server running at http://localhost:1337/')
 </pre>
 
-[Next » Creating a React Component](7-react-component)
+[Next » Creating a React Component](7-react-components)

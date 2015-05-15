@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Gulp Can Restart Node Automatically
+title: Gulp Restarts Node Automatically
 step: 5
 ---
 We'll use the `gulp-react` package to take over the JSX transformation and the `gulp-nodemon` package to run Node for us.
