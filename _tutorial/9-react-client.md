@@ -11,9 +11,9 @@ Just like we did on the server, we'll start off using React on the client *witho
 
 <pre class="brush: js">
 var Timestamp = React.createClass({
-    render: function() {
-        return React.createElement("div", null, new Date().toString())
-    }
+  render: function() {
+    return React.createElement("div", null, new Date().toString())
+  }
 })
 </pre>
 
@@ -26,21 +26,21 @@ var http = require('http')
   , fs = require('fs')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                &lt;body&gt;
-                    &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                    &lt;div id="reactContainer" /&gt;
-                &lt;/body&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        &lt;body&gt;
+          &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+          &lt;div id="reactContainer" /&gt;
+        &lt;/body&gt;)
 
-        res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
-                '&lt;/head&gt;' +
-                '&lt;script&gt;' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '&lt;/script&gt;' +
-                body +
-                '&lt;/html&gt;'
-        )
+    res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
+        '&lt;/head&gt;' +
+        '&lt;script&gt;' +
+        fs.readFileSync('./Components/Timestamp.js') +
+        '&lt;/script&gt;' +
+        body +
+        '&lt;/html&gt;'
+    )
 
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -57,25 +57,27 @@ var http = require('http')
   , fs = require('fs')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                &lt;body&gt;
-                    &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                    &lt;div id="reactContainer" /&gt;
-                &lt;/body&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        &lt;body&gt;
+          &lt;HelloWorld
+            from="index.jsx on the server"&gt;
+          &lt;/HelloWorld&gt;
+          &lt;div id="reactContainer" /&gt;
+        &lt;/body&gt;)
 
-        res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
-                '&lt;/head&gt;' +
-                '&lt;script&gt;' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '&lt;/script&gt;' +
-                body +
-                '&lt;script&gt;' +
-                'var timestampInstance = React.createFactory(Timestamp)();' +
-                'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
-                '&lt;/script&gt;' +
-                '&lt;/html&gt;'
-        )
+    res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
+        '&lt;/head&gt;' +
+        '&lt;script&gt;' +
+        fs.readFileSync('./Components/Timestamp.js') +
+        '&lt;/script&gt;' +
+        body +
+        '&lt;script&gt;' +
+        'var timestampInstance = React.createFactory(Timestamp)();' +
+        'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
+        '&lt;/script&gt;' +
+        '&lt;/html&gt;'
+    )
 
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')

@@ -12,40 +12,40 @@ var gulp = require('gulp')
   , spawn = require('child_process').spawn
 
 var transform = function(srcFile, destFile, cb) {
-    console.log('Reading %s...', srcFile)
+  console.log('Reading %s...', srcFile)
 
-    var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
-        if (readErr) {
-            cb(readErr)
+  var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
+    if (readErr) {
+      cb(readErr)
+    }
+    else {
+      console.log('Writing %s', destFile)
+      fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
+        if (writeErr) {
+          cb(writeErr)
         }
         else {
-            console.log('Writing %s', destFile)
-            fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
-                if (writeErr) {
-                    cb(writeErr)
-                }
-                else {
-                    cb()
-                }
-            })
+          cb()
         }
-    })
+      })
+    }
+  })
 }
 
 gulp.task('jsx', function(cb) {
-    fs.mkdir('./lib', function(err) {
-        transform('index.jsx', './lib/index.js', function(err) {
-            cb(err)
-        })
+  fs.mkdir('./lib', function(err) {
+    transform('index.jsx', './lib/index.js', function(err) {
+      cb(err)
     })
+  })
 })
 
 gulp.task('node', ['jsx'], function() {
-    spawn('node', ['./lib/index.js'], { stdio: 'inherit'})
+  spawn('node', ['./lib/index.js'], { stdio: 'inherit'})
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 </pre>
 

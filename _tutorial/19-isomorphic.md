@@ -29,22 +29,22 @@ var app = express()
 app.use('/pages', express.static(path.join(__dirname, 'Pages')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                &lt;html&gt;
-                    &lt;head&gt;
-                        &lt;title&gt;Hello World&lt;/title&gt;
-                    &lt;/head&gt;
-                    &lt;body&gt;
-                        &lt;div id="reactContainer" /&gt;
-                        &lt;div id="reactHelloContainer"&gt;
-                            &lt;HelloWorld from="server.jsx, running on the server"&gt;&lt;/HelloWorld&gt;
-                        &lt;/div&gt;
-                    &lt;/body&gt;
-                    &lt;script src="/pages/index.js"&gt;&lt;/script&gt;
-                &lt;/html&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Hello World&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;div id="reactContainer" /&gt;
+        &lt;div id="reactHelloContainer"&gt;
+          &lt;HelloWorld from="server.jsx, running on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;/div&gt;
+      &lt;/body&gt;
+      &lt;script src="/pages/index.js"&gt;&lt;/script&gt;
+    &lt;/html&gt;)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -57,22 +57,22 @@ Well, the test for that is easy: **View Source**.
 
 <pre class="brush: html">
 &lt;html data-reactid=".1hcyssffzeo" data-react-checksum="1801386867"&gt;
-    &lt;head data-reactid=".1hcyssffzeo.0"&gt;
-        &lt;title data-reactid=".1hcyssffzeo.0.0"&gt;Hello World&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body data-reactid=".1hcyssffzeo.1"&gt;
-        &lt;div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"&gt;&lt;/div&gt;
-        &lt;div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1"&gt;
-            &lt;div data-reactid=".1hcyssffzeo.1.1.0"&gt;
-                &lt;div data-reactid=".1hcyssffzeo.1.1.0.0"&gt;This is from the HelloWorld.jsx component&#x27;s render function.&lt;/div&gt;
-                &lt;div data-reactid=".1hcyssffzeo.1.1.0.1"&gt;
-                    &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.0"&gt;Rendered from: &lt;/span&gt;
-                    &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.1"&gt;server.jsx, running on the server&lt;/span&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+  &lt;head data-reactid=".1hcyssffzeo.0"&gt;
+    &lt;title data-reactid=".1hcyssffzeo.0.0"&gt;Hello World&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body data-reactid=".1hcyssffzeo.1"&gt;
+    &lt;div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"&gt;&lt;/div&gt;
+    &lt;div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1"&gt;
+      &lt;div data-reactid=".1hcyssffzeo.1.1.0"&gt;
+        &lt;div data-reactid=".1hcyssffzeo.1.1.0.0"&gt;This is from the HelloWorld.jsx component&#x27;s render function.&lt;/div&gt;
+        &lt;div data-reactid=".1hcyssffzeo.1.1.0.1"&gt;
+          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.0"&gt;Rendered from: &lt;/span&gt;
+          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.1"&gt;server.jsx, running on the server&lt;/span&gt;
         &lt;/div&gt;
-    &lt;/body&gt;
-    &lt;script src="/pages/index.js" data-reactid=".1hcyssffzeo.2"&gt;&lt;/script&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+  &lt;script src="/pages/index.js" data-reactid=".1hcyssffzeo.2"&gt;&lt;/script&gt;
 &lt;/html&gt;
 </pre>
 

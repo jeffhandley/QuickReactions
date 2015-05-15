@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Server-Side Processing of JSX for the Client
+title: Server-Side JSX Processing for the Client
 step: 14
 ---
 We should go ahead and follow the warning's guidance though, and convert over to the other approach: Let's convert the JSX to JS on the server (as part of our build process), and get back to serving it as raw JavaScript instead of JSX.
@@ -11,22 +11,22 @@ This happened because of the "jsx" and "watch-jsx" Gulp tasks that we configured
 
 <pre class="brush: js">
 gulp.task('watch-jsx', ['jsx'], function() {
-    gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
-        gulp.start('jsx')
-    })
+  gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
+    gulp.start('jsx')
+  })
 })
 
 gulp.task('jsx', function() {
-    return gulp.src('**/*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('**/*.jsx')
+             .pipe(gulpReact())
+             .pipe(gulp.dest('lib'))
 })
 </pre>
 
 So in order to get to where we're using JSX components in the browser, but as raw JavaScript, we don't have much to do.
 
 1. Serve components from the `/lib/Components` folder instead of the `/Components` folder
-1. Change the `&lt;script&gt;` tag back to `/Components/Timestamp.js`
+1. Change the `<script>` tag back to `/Components/Timestamp.js`
 1. Remove the `text/jsx` script types
 1. Remove the JSXTransformer script tag too
 
@@ -39,26 +39,31 @@ var React = require('react')
   , path = require('path')
 
 var app = express()
-app.use('/Components', express.static(path.join(__dirname, 'Components')))
-app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.use('/Components',
+  express.static(path.join(__dirname, 'Components')))
+
+app.use('/assets',
+  express.static(path.join(path.join(__dirname, '..'),
+  'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                &lt;html&gt;
-                    &lt;head&gt;
-                        &lt;title&gt;Hello World&lt;/title&gt;
-                        &lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;
-                        &lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;
-                    &lt;/head&gt;
-                    &lt;body&gt;
-                        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                        &lt;div id="reactContainer" /&gt;
-                    &lt;/body&gt;
-                    &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
-                &lt;/html&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Hello World&lt;/title&gt;
+        &lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;
+        &lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;div id="reactContainer" /&gt;
+      &lt;/body&gt;
+      &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
+    &lt;/html&gt;)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)

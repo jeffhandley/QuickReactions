@@ -36,12 +36,14 @@ Here's what `/Components/Timestamp.jsx` gets edited to.
 var React = require('react')
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        return { date: "Initial State: " + new Date().toString() }
-    },
-    render: function() {
-        return <div>{this.state.date}</div>
+  getInitialState: function() {
+    return {
+      date: "Initial State: " + new Date().toString()
     }
+  },
+  render: function() {
+    return <div>{this.state.date}</div>
+  }
 })
 </pre>
 
@@ -53,8 +55,14 @@ var HelloWorld = require('../lib/Components/HelloWorld')
 var Timestamp = require('../lib/Components/Timestamp')
 
 var timestampInstance = React.createFactory(Timestamp)();
-var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
-setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
+
+var timestampElement = React.render(timestampInstance,
+    document.getElementById("reactContainer"));
+
+setInterval(function() {
+    timestampElement.setState({
+        date: "Updated through setState: "
+              + new Date().toString() }) }, 500)
 
 var helloInstance = React.createFactory(HelloWorld)( { from: "From the client" } );
 var helloElement = React.render(helloInstance, document.getElementById("reactHelloContainer"));
@@ -69,25 +77,30 @@ var React = require('react')
   , path = require('path')
 
 var app = express()
-app.use('/Components', express.static(path.join(__dirname, 'Components')))
-app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.use('/Components',
+  express.static(path.join(__dirname, 'Components')))
+
+app.use('/assets',
+  express.static(path.join(path.join(__dirname, '..'),
+  'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                &lt;html&gt;
-                    &lt;head&gt;
-                        &lt;title&gt;Hello World&lt;/title&gt;
-                    &lt;/head&gt;
-                    &lt;body&gt;
-                        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                        &lt;div id="reactContainer" /&gt;
-                        &lt;div id="reactHelloContainer"&gt;&lt;/div&gt;
-                    &lt;/body&gt;
-                    &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
-                &lt;/html&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Hello World&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;div id="reactContainer" /&gt;
+        &lt;div id="reactHelloContainer"&gt;&lt;/div&gt;
+      &lt;/body&gt;
+      &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
+    &lt;/html&gt;)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -123,8 +136,9 @@ var gulp = require('gulp')
   , browserify = require('browserify')
 
 gulp.task('watch-jsx', ['client-scripts'], function() {
-    gulpWatch(['**/*.jsx', 'assets/*.js'], { ignored: 'lib/' }, function() {
-        gulp.start('client-scripts')
+    gulpWatch(['**/*.jsx', 'assets/*.js'], {
+        ignored: 'lib/' }, function() {
+            gulp.start('client-scripts')
     })
 })
 

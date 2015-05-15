@@ -21,27 +21,33 @@ var React = require('react')
   , path = require('path')
 
 var app = express()
-app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
-app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+
+app.use('/Components',
+  express.static(path.join(path.join(__dirname, '..'),
+  'Components')))
+
+app.use('/assets',
+  express.static(path.join(path.join(__dirname, '..'),
+  'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                &lt;html&gt;
-                    &lt;head&gt;
-                        &lt;title&gt;Hello World&lt;/title&gt;
-                        &lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;
-                        &lt;script src="//fb.me/JSXTransformer-0.13.1.js"&gt;&lt;/script&gt;
-                        &lt;script src="/Components/Timestamp.js" type="text/jsx"&gt;&lt;/script&gt;
-                    &lt;/head&gt;
-                    &lt;body&gt;
-                        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                        &lt;div id="reactContainer" /&gt;
-                    &lt;/body&gt;
-                    &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
-                &lt;/html&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Hello World&lt;/title&gt;
+        &lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;
+        &lt;script src="//fb.me/JSXTransformer-0.13.1.js"&gt;&lt;/script&gt;
+        &lt;script src="/Components/Timestamp.js" type="text/jsx"&gt;&lt;/script&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;div id="reactContainer" /&gt;
+      &lt;/body&gt;
+      &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
+    &lt;/html&gt;)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -73,12 +79,12 @@ After renaming `/Components/Timestamp.js` to `/Components/Timestamp.jsx`, its co
 
 <pre class="brush: js">
 var Timestamp = React.createClass({
-    getInitialState: function() {
-        return { date: "Initial State: " + new Date().toString() }
-    },
-    render: function() {
-        return &lt;div&gt;{this.state.date}&lt;/div&gt;
-    }
+  getInitialState: function() {
+    return { date: "Initial State: " + new Date().toString() }
+  },
+  render: function() {
+    return &lt;div&gt;{this.state.date}&lt;/div&gt;
+  }
 })
 </pre>
 

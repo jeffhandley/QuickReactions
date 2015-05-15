@@ -16,27 +16,32 @@ var React = require('react')
   , path = require('path')
 
 var app = express()
-app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
+
+app.use('/Components',
+  express.static(path.join(path.join(__dirname, '..'),
+  'Components')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                &lt;body&gt;
-                    &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
-                    &lt;div id="reactContainer" /&gt;
-                &lt;/body&gt;)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+    &lt;body&gt;
+      &lt;HelloWorld
+      from="index.jsx on the server"&gt;
+      &lt;/HelloWorld&gt;
+      &lt;div id="reactContainer" /&gt;
+    &lt;/body&gt;)
 
-        res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
-                '&lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;' +
-                '&lt;/head&gt;' +
-                body +
-                '&lt;script&gt;' +
-                'var timestampInstance = React.createFactory(Timestamp)();' +
-                'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
-                'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
-                '&lt;/script&gt;' +
-                '&lt;/html&gt;'
-        )
+  res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
+    '&lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;' +
+    '&lt;/head&gt;' +
+    body +
+    '&lt;script&gt;' +
+    'var timestampInstance = React.createFactory(Timestamp)();' +
+    'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
+    'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
+    '&lt;/script&gt;' +
+    '&lt;/html&gt;'
+  )
 })
 
 app.listen(1337)

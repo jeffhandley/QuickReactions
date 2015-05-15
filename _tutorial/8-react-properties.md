@@ -13,19 +13,19 @@ var http = require('http')
   , HelloWorld = require('./Components/HelloWorld')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            &lt;html&gt;
-                &lt;head&gt;
-                    &lt;title&gt;Hello World&lt;/title&gt;
-                &lt;/head&gt;
-                &lt;body&gt;
-                    &lt;HelloWorld from="index.jsx on the server" /&gt;
-                &lt;/body&gt;
-            &lt;/html&gt;
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Hello World&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;HelloWorld from="index.jsx on the server" /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 </pre>
@@ -36,18 +36,19 @@ Within the `Components/HelloWorld.jsx`, we'll make use of that `from` property.
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            &lt;div&gt;
-                &lt;div&gt;
-                    This is from the HelloWorld.jsx component's render function.
-                &lt;/div&gt;
-                &lt;div&gt;
-                    Rendered from: {this.props.from}
-                &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }
+  render: function() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;
+          This is from the HelloWorld.jsx
+          component's render function.
+        &lt;/div&gt;
+        &lt;div&gt;
+          Rendered from: {this.props.from}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
 })
 </pre>
 
@@ -59,16 +60,17 @@ In the `HelloWorld.jsx` file, I initially used the following code, and it result
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            &lt;div&gt;
-                This is from the HelloWorld.jsx component's render function.
-            &lt;/div&gt;
-            &lt;div&gt;
-                Rendered from: {this.props.from}
-            &lt;/div&gt;
-        )
-    }
+  render: function() {
+    return (
+      &lt;div&gt;
+        This is from the HelloWorld.jsx
+        component's render function.
+      &lt;/div&gt;
+      &lt;div&gt;
+        Rendered from: {this.props.from}
+      &lt;/div&gt;
+    )
+  }
 })
 </pre>
 

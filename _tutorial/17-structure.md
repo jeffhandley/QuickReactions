@@ -27,8 +27,9 @@ var gulp = require('gulp')
   , browserify = require('browserify')
 
 gulp.task('watch-jsx', ['build'], function() {
-    gulpWatch('src/**/*.jsx', { ignored: 'bin/' }, function() {
-        gulp.start('build')
+    gulpWatch('src/**/*.jsx', {
+        ignored: 'bin/' }, function() {
+            gulp.start('build')
     })
 })
 

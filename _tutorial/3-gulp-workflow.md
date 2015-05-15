@@ -26,36 +26,36 @@ var gulp = require('gulp')
   , reactTools = require('react-tools')
 
 var transform = function(srcFile, destFile, cb) {
-    console.log('Reading %s...', srcFile)
+  console.log('Reading %s...', srcFile)
 
-    var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
-        if (readErr) {
-            cb(readErr)
+  var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
+    if (readErr) {
+      cb(readErr)
+    }
+    else {
+      console.log('Writing %s', destFile)
+      fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
+        if (writeErr) {
+          cb(writeErr)
         }
         else {
-            console.log('Writing %s', destFile)
-            fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
-                if (writeErr) {
-                    cb(writeErr)
-                }
-                else {
-                    cb()
-                }
-            })
+          cb()
         }
-    })
+      })
+    }
+  })
 }
 
 gulp.task('jsx', function(cb) {
-    fs.mkdir('./lib', function(err) {
-        transform('index.jsx', './lib/index.js', function(err) {
-            cb(err)
-        })
+  fs.mkdir('./lib', function(err) {
+    transform('index.jsx', './lib/index.js', function(err) {
+      cb(err)
     })
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('jsx')
+  gulp.start('jsx')
 })
 </pre>
 

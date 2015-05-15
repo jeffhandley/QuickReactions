@@ -15,13 +15,13 @@ var gulp = require('gulp')
   , gulpReact = require('gulp-react')
 
 gulp.task('jsx', function() {
-    return gulp.src('*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('*.jsx')
+             .pipe(gulpReact())
+             .pipe(gulp.dest('lib'))
 })
 
 gulp.task('default', function() {
-    gulp.start('jsx')
+  gulp.start('jsx')
 })
 </pre>
 
@@ -37,20 +37,20 @@ var gulp = require('gulp')
   , gulpNodemon = require('gulp-nodemon')
 
 gulp.task('jsx', function() {
-    return gulp.src('*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('*.jsx')
+             .pipe(gulpReact())
+             .pipe(gulp.dest('lib'))
 })
 
 gulp.task('node', ['jsx'], function() {
-    gulpNodemon({
-        script: 'lib/index.js',
-        ext: 'js'
-    })
+  gulpNodemon({
+    script: 'lib/index.js',
+    ext: 'js'
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 </pre>
 

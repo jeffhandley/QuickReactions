@@ -19,7 +19,8 @@ var HelloWorld = require('../Components/HelloWorld')
 var Timestamp = require('../Components/Timestamp')
 
 React.render(
-    &lt;HelloWorld from='index.jsx, transformed, bundled, and running on the client' /&gt;,
+    &lt;HelloWorld from='index.jsx, transformed, bundled,
+        and running on the client' /&gt;,
     document.getElementById('reactHelloContainer'))
 
 var timestampElement = React.render(
@@ -27,7 +28,9 @@ var timestampElement = React.render(
     document.getElementById('reactContainer'))
 
 setInterval(function() {
-    timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) },
+    timestampElement.setState({
+        date: "Updated through setState: "
+              + new Date().toString() }) },
     500)
 </pre>
 

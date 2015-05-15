@@ -11,18 +11,19 @@ It's been a while since we've looked at HelloWorld, let's refresh our memories o
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            &lt;div&gt;
-                &lt;div&gt;
-                    This is from the HelloWorld.jsx component's render function.
-                &lt;/div&gt;
-                &lt;div&gt;
-                    Rendered from: {this.props.from}
-                &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }
+  render: function() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;
+          This is from the HelloWorld.jsx
+          component's render function.
+        &lt;/div&gt;
+        &lt;div&gt;
+          Rendered from: {this.props.from}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
 })
 </pre>
 
@@ -32,21 +33,22 @@ Okay, cool - this component already has a placeholder for where it was rendered 
 var React = require('react')
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        return { from: this.props.from }
-    },
-    render: function() {
-        return (
-            &lt;div&gt;
-                &lt;div&gt;
-                    This is from the HelloWorld.jsx component's render function.
-                &lt;/div&gt;
-                &lt;div&gt;
-                    Rendered from: {this.state.from}
-                &lt;/div&gt;
-            &lt;/div&gt;
-        )
-    }
+  getInitialState: function() {
+    return { from: this.props.from }
+  },
+  render: function() {
+    return (
+      &lt;div&gt;
+        &lt;div&gt;
+          This is from the HelloWorld.jsx
+          component's render function.
+        &lt;/div&gt;
+        &lt;div&gt;
+          Rendered from: {this.state.from}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
 })
 </pre>
 
