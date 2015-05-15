@@ -13,17 +13,19 @@ var http = require('http')
 var React = require('react')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            &lt;html&gt;
-                &lt;head&gt;
-                    &lt;title&gt;Hello World&lt;/title&gt;
-                &lt;/head&gt;
-                &lt;body&gt;index.jsx compiled into index.js by hand on the server&lt;/body&gt;
-            &lt;/html&gt;
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      &lt;html&gt;
+        &lt;head&gt;
+          &lt;title&gt;Hello World&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          index.jsx compiled into index.js by hand on the server
+        &lt;/body&gt;
+      &lt;/html&gt;
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 </pre>
@@ -42,16 +44,17 @@ var http = require('http')
 var React = require('react')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            React.createElement("html", null,
-                React.createElement("head", null,
-                    React.createElement("title", null, "Hello World")
-                ),
-            React.createElement("body", null, "index.jsx compiled into index.js by hand on the server")
-        ))
-    )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      React.createElement("html", null,
+        React.createElement("head", null,
+          React.createElement("title", null, "Hello World")
+        ),
+      React.createElement("body", null,
+        "index.jsx compiled into index.js by hand on the server")
+    ))
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 </pre>
@@ -62,10 +65,12 @@ If you view source in the browser, you'll see something like the following.
 
 <pre class="brush: html">
 &lt;html data-reactid=".qa6th1tqf4" data-react-checksum="-1942403816"&gt;
-    &lt;head data-reactid=".qa6th1tqf4.0"&gt;
-        &lt;title data-reactid=".qa6th1tqf4.0.0"&gt;Hello World&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body data-reactid=".qa6th1tqf4.1"&gt;index.jsx compiled into index.js by hand on the server&lt;/body&gt;
+  &lt;head data-reactid=".qa6th1tqf4.0"&gt;
+    &lt;title data-reactid=".qa6th1tqf4.0.0"&gt;Hello World&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body data-reactid=".qa6th1tqf4.1"&gt;
+    index.jsx compiled into index.js by hand on the server
+  &lt;/body&gt;
 &lt;/html&gt;
 </pre>
 
