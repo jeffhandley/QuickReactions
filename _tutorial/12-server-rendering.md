@@ -3,7 +3,9 @@ layout: default
 title: Improved Server Rendering
 step: 12
 ---
-My first attempt to clean up the server rendering resulted in the following `index.jsx` file.  **But be warned: *this didn't work***
+My first attempt to clean up the server rendering resulted in the following `index.jsx` file.
+
+**But be warned: *this didn't work***
 
 <pre class="brush: js">
 var React = require('react')
