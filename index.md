@@ -15,6 +15,6 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Refactor the client-side component to use JSX
 1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
 
-These 7 major steps are achieved over the course of 19 detailed iterations on the project, starting from nothing to having a functioning isomorphic page. Let's get started by getting Node.js serving a "Hello World" page.
+These 7 major steps are achieved over the course of 19 detailed iterations on the project, starting from nothing and building a functioning isomorphic page. Let's get started by getting Node.js serving a "Hello World" page.
 
 [Begin » Creating Hello World in Node.js](1-helloworld.html)
