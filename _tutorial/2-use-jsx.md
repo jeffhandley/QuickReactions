@@ -61,12 +61,12 @@ You can now run `node index.js` and verify that the server still responds, now w
 If you view source in the browser, you'll see something like the following.
 
 <pre class="brush: html">
-<html data-reactid=".qa6th1tqf4" data-react-checksum="-1942403816">
-    <head data-reactid=".qa6th1tqf4.0">
-        <title data-reactid=".qa6th1tqf4.0.0">Hello World</title>
-    </head>
-    <body data-reactid=".qa6th1tqf4.1">index.jsx compiled into index.js by hand on the server</body>
-</html>
+&lt;html data-reactid=".qa6th1tqf4" data-react-checksum="-1942403816"&gt;
+    &lt;head data-reactid=".qa6th1tqf4.0"&gt;
+        &lt;title data-reactid=".qa6th1tqf4.0.0"&gt;Hello World&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body data-reactid=".qa6th1tqf4.1"&gt;index.jsx compiled into index.js by hand on the server&lt;/body&gt;
+&lt;/html&gt;
 </pre>
 
 [Next » Use Gulp to improve the development workflow](3-gulp-workflow)
