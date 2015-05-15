@@ -258,6 +258,7 @@ aside ol {
   aside {
     display: none; }
   .main-content {
+    max-width: 42em;
     padding: 2rem 4rem;
     font-size: 1.1rem; }
   .site-footer {
@@ -274,8 +275,10 @@ aside ol {
     padding: 1rem 1rem;
     font-size: 0.9rem ;}}
 
-.main-content .step-title {
-  margin-left: -2ex; }
+@media screen and (min-width: 42em) {
+  .main-content .step-title {
+    margin-left: -2ex; }
+}
 
 .site-footer {
   border-top: solid 1px #eff0f1; }
