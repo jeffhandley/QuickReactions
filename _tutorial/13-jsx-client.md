@@ -93,9 +93,14 @@ That was only a 1-line change for this component; not bad.  We'll change our `in
 **It did!** Refreshing the page, we see that it's still functioning just like it was before.  Huh.  That was pretty anti-climactic, wasn't it?  Viewing source, just to make sure the change actually took effect, we can see that sure enough, the following was rendered:
 
 <pre class="brush: js">
-&lt;script src="//fb.me/react-0.13.1.js" data-reactid=".23it8p7ku0w.0.1"&gt;&lt;/script&gt;
-&lt;script src="//fb.me/JSXTransformer-0.13.1.js" data-reactid=".23it8p7ku0w.0.2"&gt;&lt;/script&gt;
-&lt;script src="/Components/Timestamp.jsx" type="text/jsx" data-reactid=".23it8p7ku0w.0.3"&gt;&lt;/script&gt;
+&lt;script src="//fb.me/react-0.13.1.js" data-reactid=".23it8p7ku0w.0.1"&gt;
+&lt;/script&gt;
+
+&lt;script src="//fb.me/JSXTransformer-0.13.1.js" data-reactid=".23it8p7ku0w.0.2"&gt;
+&lt;/script&gt;
+
+&lt;script src="/Components/Timestamp.jsx" type="text/jsx" data-reactid=".23it8p7ku0w.0.3"&gt;
+&lt;/script&gt;
 </pre>
 
 Following the link to `/Components/Timestamp.jsx`, we also get confirmation that we sent actual JSX code down to the browser and the JSXTransformer component processed it like magic.
