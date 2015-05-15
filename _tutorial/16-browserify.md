@@ -57,15 +57,16 @@ var Timestamp = require('../lib/Components/Timestamp')
 var timestampInstance = React.createFactory(Timestamp)();
 
 var timestampElement = React.render(timestampInstance,
-    document.getElementById("reactContainer"));
+  document.getElementById("reactContainer"));
 
 setInterval(function() {
-    timestampElement.setState({
-        date: "Updated through setState: "
-              + new Date().toString() }) }, 500)
+  timestampElement.setState({
+    date: "Updated through setState: "
+        + new Date().toString() }) }, 500)
 
 var helloInstance = React.createFactory(HelloWorld)( { from: "From the client" } );
-var helloElement = React.render(helloInstance, document.getElementById("reactHelloContainer"));
+var helloElement = React.render(helloInstance,
+  document.getElementById("reactHelloContainer"));
 </pre>
 
 To illustrate client rendering of the HelloWorld component here, we've added a couple of lines at the bottom of `/assets/index.js` that will do that.  We're rendering the HelloWorld element into a "reactHelloContainer" element--we need to create that.  Here's what `/index.jsx` looks like after adding that `<div>`.
@@ -188,7 +189,8 @@ Now there's one last detail we need to take care of: we need the browser to be a
 **BEFORE**
 
 <pre class="brush: js">
-app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
+app.use('/assets', express.static(path.join(path.join(__dirname, '..'),
+  'assets')))
 </pre>
 
 **AFTER**
