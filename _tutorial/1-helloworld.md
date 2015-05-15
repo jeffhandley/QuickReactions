@@ -22,4 +22,4 @@ Create `index.js` using the example webserver code from [https://nodejs.org](htt
     console.log('Server running at http://localhost:1337/')
 </pre>
 
-[Next » Use React's JSX syntax to define component content](2-use-jsx.html)
+[Next » Using React's JSX Syntax](2-jsx.html)

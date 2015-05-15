@@ -17,4 +17,4 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 
 Let's get started by getting Node.js serving a "Hello World" page.
 
-[Begin » Create a Hello World web server in Node.js](1-node-helloworld.html)
+[Begin » Creating Hello World in Node.js](1-helloworld.html)

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Use React's JSX Syntax
+title: React's JSX Syntax
 step: 2
 ---
 1. npm install react -save
@@ -69,4 +69,4 @@ If you view source in the browser, you'll see something like the following.
 &lt;/html&gt;
 </pre>
 
-[Next » Use Gulp to improve the development workflow](3-gulp-workflow)
+[Next » Improving Development Workflow with Gulp](3-gulp-workflow)
