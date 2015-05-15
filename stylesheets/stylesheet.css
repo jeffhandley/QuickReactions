@@ -234,24 +234,24 @@ aside ol {
   .main-content {
     max-width: 90rem;
     padding: 2rem 10rem;
-    margin: 0 auto;
+    margin-right: 8rem;
     font-size: 1.1rem; }
   .site-footer {
     max-width: 100rem;
     padding: 1rem 16rem 2rem 10rem;
-    margin: 0 auto;
+    margin-right: 8rem;
     font-size: 1rem; } }
 
 @media screen and (min-width: 64em) and (max-width: 100em) {
   .main-content {
     max-width: 60rem;
     padding: 2rem 6rem;
-    margin: 0 auto;
+    margin-right: 8rem;
     font-size: 1.1rem; }
   .site-footer {
     max-width: 64rem;
     padding: 1rem 6rem;
-    margin: 0 auto;
+    margin-right: 8rem;
     font-size: 1rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
