@@ -81,7 +81,8 @@ We'll make a couple of little housekeeping changes to tidy things up.  In `/src/
 And then in `/src/Pages/index.jsx`, we'll make a change to the message it passes to the HelloWorld component too.
 
 <pre class="brush: js">
-var helloInstance = React.createFactory(HelloWorld)( { from: "index.jsx, transformed and running on the client" } );
+var helloInstance = React.createFactory(HelloWorld)( {
+  from: "index.jsx, transformed and running on the client" } );
 </pre>
 
 [Next » Using JSX for the Pages](18-jsx-pages)
