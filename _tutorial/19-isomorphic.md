@@ -64,10 +64,16 @@ Well, the test for that is easy: **View Source**.
     &lt;div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"&gt;&lt;/div&gt;
     &lt;div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1"&gt;
       &lt;div data-reactid=".1hcyssffzeo.1.1.0"&gt;
-        &lt;div data-reactid=".1hcyssffzeo.1.1.0.0"&gt;This is from the HelloWorld.jsx component&#x27;s render function.&lt;/div&gt;
+        &lt;div data-reactid=".1hcyssffzeo.1.1.0.0"&gt;
+          This is from the HelloWorld.jsx component&#x27;s render function.
+        &lt;/div&gt;
         &lt;div data-reactid=".1hcyssffzeo.1.1.0.1"&gt;
-          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.0"&gt;Rendered from: &lt;/span&gt;
-          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.1"&gt;server.jsx, running on the server&lt;/span&gt;
+          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.0"&gt;
+            Rendered from:
+          &lt;/span&gt;
+          &lt;span data-reactid=".1hcyssffzeo.1.1.0.1.1"&gt;
+            server.jsx, running on the server
+          &lt;/span&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
