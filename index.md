@@ -5,7 +5,7 @@ title: QuickReactions by jeffhandley - Isomorphic Hello World with React and Nod
 
 While working through sample after sample for Node.js and React.js, I experienced a pattern that wasn't very helpful. Instead of truly starting from scratch, the samples kept walking through step-by-step of cloning a working solution.  They'd start with "Step 1: paste this fully-working code into this file" and "Step 2: paste this fully-working code into this other file." I was having a hard time finding a breakdown of the concepts being applied.
 
-I wanted to learn by starting truly from scratch and building the app up in logical, incremental steps. This tutorial uses the following approach:
+I wanted to learn by starting truly from scratch and building the app up in logical, incremental steps. This tutorial uses the following high-level approach:
 
 1. Create a Hello World web server in Node.js
 1. Use React's JSX syntax to define component content
@@ -15,6 +15,6 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Refactor the client-side component to use JSX
 1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
 
-Let's get started by getting Node.js serving a "Hello World" page.
+These 7 major steps are achieved over the course of 19 detailed iterations on the project, starting from nothing to having a functioning isomorphic page. Let's get started by getting Node.js serving a "Hello World" page.
 
 [Begin » Creating Hello World in Node.js](1-helloworld.html)
