@@ -31,14 +31,18 @@ app.get('/', function (req, res) {
       &lt;div id="reactContainer" /&gt;
     &lt;/body&gt;)
 
-  res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
+  res.end('&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello World&lt;/title&gt;' +
+    '&lt;script src="//fb.me/react-0.13.1.js"&gt;&lt;/script&gt;' +
     '&lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;' +
     '&lt;/head&gt;' +
     body +
     '&lt;script&gt;' +
     'var timestampInstance = React.createFactory(Timestamp)();' +
-    'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
-    'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
+    'var timestampElement = React.render(timestampInstance, ' +
+    '  document.getElementById("reactContainer"));' +
+    'setInterval(function() { timestampElement.setState({ ' +
+    '  date: "Updated through setState: " ' +
+    '  + new Date().toString() }) }, 500)' +
     '&lt;/script&gt;' +
     '&lt;/html&gt;'
   )
