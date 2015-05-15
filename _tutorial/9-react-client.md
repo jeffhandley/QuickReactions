@@ -76,7 +76,8 @@ http.createServer(function (req, res) {
     body +
     '&lt;script&gt;' +
     'var timestampInstance = React.createFactory(Timestamp)();' +
-    'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
+    'setInterval(function() { ' +
+    '    React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
     '&lt;/script&gt;' +
     '&lt;/html&gt;'
     )
