@@ -66,8 +66,13 @@ Let's create a top-level `assets` folder and create this file as `assets/index.j
 
 <pre class="brush: js">
 var timestampInstance = React.createFactory(Timestamp)();
-var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
-setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
+
+var timestampElement = React.render(timestampInstance,
+  document.getElementById("reactContainer"));
+
+setInterval(function() {
+  timestampElement.setState({
+    date: "Updated through setState: " + new Date().toString() }) }, 500)
 </pre>
 
 Then we'll update our `index.jsx` file for Express to also serve static assets from our `assets` folder, and then we'll change our inline `<script>` tag over to `<script src="/assets/index.js"></script>`.
