@@ -61,8 +61,7 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   var body = React.renderToString(
     &lt;body&gt;
-      &lt;HelloWorld
-      from="index.jsx on the server"&gt;
+      &lt;HelloWorld from="index.jsx on the server"&gt;
       &lt;/HelloWorld&gt;
       &lt;div id="reactContainer" /&gt;
     &lt;/body&gt;)
