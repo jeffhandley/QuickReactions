@@ -281,6 +281,7 @@ aside ol a.selected {
 }
 
 .site-footer {
+  clear: both;
   border-top: solid 1px #eff0f1; }
 
 .site-footer-owner {
