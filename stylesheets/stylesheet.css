@@ -131,6 +131,11 @@ aside ol {
   margin-top: 0;
 }
 
+aside ol a.selected {
+  font-style: italic;
+  font-weight: bold;
+}
+
 .main-content :first-child {
   margin-top: 0; }
 .main-content img {
