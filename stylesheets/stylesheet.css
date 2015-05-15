@@ -289,3 +289,8 @@ aside ol a.selected {
 
 .site-footer-credits {
   color: #819198; }
+
+/* Hide the syntaxhighlighter help */
+div.toolbar {
+    display:none!important;
+}
