@@ -46,15 +46,15 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
     res.end(
         React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>
+            &lt;html&gt;
+                &lt;head&gt;
+                    &lt;title&gt;Hello World&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
                     index.jsx, automatically processed through gulp and gulp-react,
                     with node automatically restarted through gulp-nodemon!
-                </body>
-            </html>
+                &lt;/body&gt;
+            &lt;/html&gt;
         )
     )
 }).listen(1337)
