@@ -3,10 +3,10 @@ layout: default
 title: Reaching Isomorphic Goal
 step: 19
 ---
-&gt; isomorphic
-&gt;
-&gt; ADJECTIVE
-&gt; corresponding or similar in form and relations.
+> isomorphic
+>
+> ADJECTIVE
+> corresponding or similar in form and relations.
 
 With React apps, people have been using the term 'isomorphic' to describe applications that:
 
@@ -15,9 +15,9 @@ With React apps, people have been using the term 'isomorphic' to describe applic
 
 React makes this approach really efficient because it puts checksums on DOM elements and when the client rendering is performed, any elements that have the same content as what the server generated will not be re-rendered in the DOM.
 
-Getting to isomorphic behavior was the goal of this project; let's see if we can do it now.  We are already rendering the `&lt;HelloWorld&gt;` component on the server and separately on the client.  Instead of having two instances on the page, we'll combine them and achieve the isomorphic goal.
+Getting to isomorphic behavior was the goal of this project; let's see if we can do it now.  We are already rendering the `<HelloWorld>` component on the server and separately on the client.  Instead of having two instances on the page, we'll combine them and achieve the isomorphic goal.
 
-When the client calls `React.render()`, we need to give it the container element.  For our client-side rendering of HelloWorld, we were using the `&lt;div id="reactHelloContainer"&gt;` element.  Let's just move our server-side rendering of HelloWorld into that container, and then the client-side rendering should take it over.
+When the client calls `React.render()`, we need to give it the container element.  For our client-side rendering of HelloWorld, we were using the `<div id="reactHelloContainer">` element.  Let's just move our server-side rendering of HelloWorld into that container, and then the client-side rendering should take it over.
 
 <pre class="brush: js">
 var React = require('react')

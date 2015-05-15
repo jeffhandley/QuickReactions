@@ -75,17 +75,17 @@ app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets'
 app.get('/', function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
     var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                        <div id="reactHelloContainer"></div>
-                    </body>
-                    <script src="/assets/index.js"></script>
-                </html>)
+                &lt;html&gt;
+                    &lt;head&gt;
+                        &lt;title&gt;Hello World&lt;/title&gt;
+                    &lt;/head&gt;
+                    &lt;body&gt;
+                        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+                        &lt;div id="reactContainer" /&gt;
+                        &lt;div id="reactHelloContainer"&gt;&lt;/div&gt;
+                    &lt;/body&gt;
+                    &lt;script src="/assets/index.js"&gt;&lt;/script&gt;
+                &lt;/html&gt;)
 
         res.end(html)
 })
@@ -172,11 +172,13 @@ With all of this in place, we can edit `/assets/index.js` while Node is running 
 Now there's one last detail we need to take care of: we need the browser to be able to get to the Browserify output.  Right now, it can reach `/lib/Components` and `/assets` but we need it to get to `/lib/assets`.  The good news is that we no longer need direct access to `/assets`.  So let's edit `index.jsx` to serve static content from `/lib/assets/` under the `/assets` path.
 
 **BEFORE**
+
 <pre class="brush: js">
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 </pre>
 
 **AFTER**
+
 <pre class="brush: js">
 app.use('/assets', express.static(path.join(__dirname, 'assets')))
 </pre>

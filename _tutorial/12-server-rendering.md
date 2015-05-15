@@ -46,11 +46,11 @@ Trying to run this results in a broken page and an error visible on the console:
 
 `ReferenceError: timestampElement is not defined`
 
-This confused me for a while, but after some investigation (removing some of the inline script and building it back up), I found that the JSX parser is trying to process the contents of the `&lt;script&gt;` tag.  When the `setInterval` statement is evaluated, the `{ timestampElement.setState...` is actually processed on the server!
+This confused me for a while, but after some investigation (removing some of the inline script and building it back up), I found that the JSX parser is trying to process the contents of the `<script>` tag.  When the `setInterval` statement is evaluated, the `{ timestampElement.setState...` is actually processed on the server!
 
 Additionally, I saw that the `document.getElementById("reactContainer")` statement's quotes were also getting escaped by the rendering, and I couldn't find a straight-forward day to address that.
 
-Ugh - so I've now learned that combining inline `&lt;script&gt;` tags and JSX is not a good recipe.  We'll need a different approach.  We'll go with a simple solution for the moment and just extract that code out into a separate JS file--one specifically for this page.
+Ugh - so I've now learned that combining inline `<script>` tags and JSX is not a good recipe.  We'll need a different approach.  We'll go with a simple solution for the moment and just extract that code out into a separate JS file--one specifically for this page.
 
 Let's create a top-level `assets` folder and create this file as `assets/index.js`.
 
@@ -60,7 +60,7 @@ var timestampElement = React.render(timestampInstance, document.getElementById("
 setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
 </pre>
 
-Then we'll update our `index.jsx` file for Express to also serve static assets from our `assets` folder, and then we'll change our inline `&lt;script&gt;` tag over to `&lt;script src="/assets/index.js"&gt;&lt;/script&gt;`.
+Then we'll update our `index.jsx` file for Express to also serve static assets from our `assets` folder, and then we'll change our inline `<script>` tag over to `<script src="/assets/index.js"></script>`.
 
 <pre class="brush: js">
 var React = require('react')

@@ -31,6 +31,6 @@ setInterval(function() {
     500)
 </pre>
 
-Just to make sure this actually worked, the `&lt;HelloWorld&gt;` message was changed slightly. But yeah, this worked like a charm!
+Just to make sure this actually worked, the `<HelloWorld>` message was changed slightly. But yeah, this worked like a charm!
 
 [Next » Going Isomorphic](19-isomorphic)

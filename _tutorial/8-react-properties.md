@@ -5,7 +5,7 @@ step: 8
 ---
 Let's pass some properties to the `HelloWorld` component now!
 
-In `index.jsx`, we'll simply add an attribute to the `&lt;HelloWorld&gt;` tag.
+In `index.jsx`, we'll simply add an attribute to the `<HelloWorld>` tag.
 
 <pre class="brush: js">
 var http = require('http')
@@ -72,6 +72,6 @@ module.exports = React.createClass({
 })
 </pre>
 
-It took a few minutes to understand, but what was happening is the `HelloWorld.jsx` file's return statement had two adjacent `&lt;div&gt;` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `&lt;div&gt;` elements in an outer `&lt;div&gt;`, as seen above in the working code.
+It took a few minutes to understand, but what was happening is the `HelloWorld.jsx` file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
 
 [Next » Running React on the Client](9-react-client)

@@ -16,12 +16,12 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
     res.end(
         React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>index.jsx compiled into index.js by hand on the server</body>
-            </html>
+            &lt;html&lt;
+                &lt;head&lt;
+                    &lt;title&lt;Hello World&lt;/title&lt;
+                &lt;/head&lt;
+                &lt;body&lt;index.jsx compiled into index.js by hand on the server&lt;/body&lt;
+            &lt;/html&lt;
         )
     )
 }).listen(1337)

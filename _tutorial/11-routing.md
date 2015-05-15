@@ -7,7 +7,7 @@ Okay, I've had enough of the HTML string building.  Let's get some basic routing
 
 1. npm install express -save
 
-With `Express` installed, we can now get rid of our raw **http** code, spin up an `Express` server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `&lt;script src="..."&gt;&lt;/script&gt;` tag to get our `Timestamp.js` file down to the browser.  Here's what `index.jsx` looks like after those transformations.
+With `Express` installed, we can now get rid of our raw **http** code, spin up an `Express` server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `<script src="..."></script>` tag to get our `Timestamp.js` file down to the browser.  Here's what `index.jsx` looks like after those transformations.
 
 <pre class="brush: js">
 var React = require('react')
@@ -51,4 +51,4 @@ Notes:
 
 We're also obviously not yet rid of the HTML string building--let's do that now.
 
-[Next » Adding Basic Routing](11-routing-basic)
+[Next » Improving the Server Rendering](12-server-rendering)

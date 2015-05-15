@@ -52,7 +52,7 @@ module.exports = React.createClass({
 
 We now pass the property in the same way, but the property value gets converted over to state, which we can then modify later through `setState()`.  Now let's see what happens when we try to use this component on the client.  We'll simply add another `&lt;script&gt;` tag to get started.
 
-`&lt;script src="/Components/HelloWorld.js"&gt;&lt;/script&gt;`
+`<script src="/Components/HelloWorld.js"></script>`
 
 Running the page, we get an error in the console.
 

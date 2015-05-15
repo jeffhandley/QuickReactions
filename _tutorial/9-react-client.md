@@ -46,7 +46,7 @@ http.createServer(function (req, res) {
 console.log('Server running at http://localhost:1337/')
 </pre>
 
-You might be wondering why we're not just referencing `Timestamp.js` through a `&lt;script src="/Components/Timestamp.js"&gt;&lt;/script&gt;` tag.  That's because we don't have any routing in place--all requests, regardless of URL, are getting the same response.  Don't worry though, we'll introduce some routing soon enough so that this file can get served up separately.
+You might be wondering why we're not just referencing `Timestamp.js` through a `<script src="/Components/Timestamp.js"></script>` tag.  That's because we don't have any routing in place--all requests, regardless of URL, are getting the same response.  Don't worry though, we'll introduce some routing soon enough so that this file can get served up separately.
 
 Okay, if you load the page with this in place you should see the inline JavaScript, but we're not doing anything with it yet.  Let's render this component using `React.render`.
 
