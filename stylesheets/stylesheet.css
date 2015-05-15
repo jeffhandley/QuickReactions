@@ -232,7 +232,7 @@ aside ol {
 
 @media screen and (min-width: 100em) {
   .main-content {
-    max-width: 100rem;
+    max-width: 90rem;
     padding: 2rem 10rem;
     margin: 0 auto;
     font-size: 1.1rem; }
@@ -244,7 +244,7 @@ aside ol {
 
 @media screen and (min-width: 64em) and (max-width: 100em) {
   .main-content {
-    max-width: 64rem;
+    max-width: 60rem;
     padding: 2rem 6rem;
     margin: 0 auto;
     font-size: 1.1rem; }
@@ -258,7 +258,7 @@ aside ol {
   aside {
     display: none; }
   .main-content {
-    max-width: 42em;
+    max-width: 40em;
     padding: 2rem 4rem;
     font-size: 1.1rem; }
   .site-footer {
