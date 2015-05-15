@@ -189,8 +189,7 @@ Now there's one last detail we need to take care of: we need the browser to be a
 **BEFORE**
 
 <pre class="brush: js">
-app.use('/assets', express.static(path.join(path.join(__dirname, '..'),
-  'assets')))
+app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 </pre>
 
 **AFTER**
