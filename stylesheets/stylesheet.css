@@ -233,24 +233,24 @@ aside ol {
 @media screen and (min-width: 100em) {
   .main-content {
     max-width: 100rem;
-    padding: 2rem 10rem 2rem 2rem;
+    padding: 2rem 10rem;
     margin: 0 auto;
     font-size: 1.1rem; }
   .site-footer {
     max-width: 100rem;
-    padding: 1rem 10rem 2rem 2rem;
+    padding: 1rem 16rem 2rem 10rem;
     margin: 0 auto;
     font-size: 1rem; } }
 
 @media screen and (min-width: 64em) and (max-width: 100em) {
   .main-content {
     max-width: 64rem;
-    padding: 2rem 6rem 2rem 2rem;
+    padding: 2rem 6rem;
     margin: 0 auto;
     font-size: 1.1rem; }
   .site-footer {
     max-width: 64rem;
-    padding: 1rem 6rem 1rem 2rem;
+    padding: 1rem 6rem;
     margin: 0 auto;
     font-size: 1rem; } }
 
@@ -258,10 +258,10 @@ aside ol {
   aside {
     display: none; }
   .main-content {
-    padding: 2rem 4rem 2rem 1rem;
+    padding: 2rem 4rem;
     font-size: 1.1rem; }
   .site-footer {
-    padding: 1rem 4rem 2rem 1rem;
+    padding: 1rem 4rem;
     font-size: 1rem; }}
 
 @media screen and (max-width: 42em) {
