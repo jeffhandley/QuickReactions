@@ -1,4 +1,7 @@
 # Quick Reactions
+
+**To view this in a step-by-step tutorial form, see [http://jeffhandley.github.io/QuickReactions](http://jeffhandley.github.io/QuickReactions)**
+
 ## Isomorphic Hello World with React and Node
 
 While working through sample after sample for Node.js and React.js, I experienced a pattern that wasn't very helpful. Instead of truly starting from scratch, the samples kept walking through step-by-step of cloning a working solution.  They'd start with "Step 1: paste this fully-working code into this file" and "Step 2: paste this fully-working code into this other file." But I haven't been able to find a breakdown of the concepts being applied.
@@ -460,7 +463,7 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   var body = React.renderToString(
         <body>
-          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <HelloWorld from="index.jsx on the server" />
           <div id="reactContainer" />
         </body>)
 
@@ -491,7 +494,7 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   var body = React.renderToString(
         <body>
-          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <HelloWorld from="index.jsx on the server" />
           <div id="reactContainer" />
         </body>)
 
@@ -553,7 +556,7 @@ http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   var body = React.renderToString(
         <body>
-          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <HelloWorld from="index.jsx on the server" />
           <div id="reactContainer" />
         </body>)
 
@@ -597,7 +600,7 @@ app.get('/', function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   var body = React.renderToString(
         <body>
-          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <HelloWorld from="index.jsx on the server" />
           <div id="reactContainer" />
         </body>)
 
@@ -650,7 +653,7 @@ app.get('/', function (req, res) {
             <script src="/Components/Timestamp.js"></script>
           </head>
           <body>
-            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <HelloWorld from="index.jsx on the server" />
             <div id="reactContainer" />
           </body>
           <script>
@@ -707,7 +710,7 @@ app.get('/', function (req, res) {
             <script src="/Components/Timestamp.js"></script>
           </head>
           <body>
-            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <HelloWorld from="index.jsx on the server" />
             <div id="reactContainer" />
           </body>
           <script src="/assets/index.js"></script>
@@ -755,7 +758,7 @@ app.get('/', function (req, res) {
             <script src="/Components/Timestamp.js" type="text/jsx"></script>
           </head>
           <body>
-            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <HelloWorld from="index.jsx on the server" />
             <div id="reactContainer" />
           </body>
           <script src="/assets/index.js"></script>
@@ -864,7 +867,7 @@ app.get('/', function (req, res) {
             <script src="/Components/Timestamp.js"></script>
           </head>
           <body>
-            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <HelloWorld from="index.jsx on the server" />
             <div id="reactContainer" />
           </body>
           <script src="/assets/index.js"></script>
@@ -1021,7 +1024,7 @@ app.get('/', function (req, res) {
             <title>Hello World</title>
           </head>
           <body>
-            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <HelloWorld from="index.jsx on the server" />
             <div id="reactContainer" />
             <div id="reactHelloContainer"></div>
           </body>
@@ -1325,7 +1328,7 @@ app.get('/', function (req, res) {
           <body>
             <div id="reactContainer" />
             <div id="reactHelloContainer">
-              <HelloWorld from="server.jsx, running on the server"></HelloWorld>
+              <HelloWorld from="server.jsx, running on the server" />
             </div>
           </body>
           <script src="/pages/index.js"></script>
