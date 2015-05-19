@@ -13,7 +13,7 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 1. Refactor the client-side component to use JSX
 1. Integrate the server-side and client-side React.js usage, achieving an "Isomorphic" page
 
-Let's get started!
+These 7 major steps are achieved over the course of 19 detailed iterations on the project, starting from nothing and building a functioning isomorphic page. Let's get started by getting Node.js serving a "Hello World" page.
 
 ### Create a new "project"
 1. CD into a new directory
@@ -74,10 +74,10 @@ http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'})
     res.end(
         React.renderToString(
-            React.createElement("html", null, 
-                React.createElement("head", null, 
+            React.createElement("html", null,
+                React.createElement("head", null,
                     React.createElement("title", null, "Hello World")
-                ), 
+                ),
             React.createElement("body", null, "index.jsx compiled into index.js by hand on the server")
         ))
     )
@@ -223,7 +223,7 @@ gulp.task('default', function() {
 })
 ```
 
-Gulp's piping make this really clean.  And we can now use gulp-nodemon to take care of running Node for us.
+Gulp's piping make this really clean.  And we can now use `gulp-nodemon` to take care of running Node for us.
 
 1. npm install gulp-nodemon --save-dev
 
@@ -254,7 +254,7 @@ gulp.task('default', function() {
 
 To see the effects of this, try editing the `lib/index.js` file directly and you'll see that nodemon will restart the server for us right away.
 
-To bring this all together, we need to get Gulp to watch our `index.jsx` file and call our `jsx` task whenever the file is touched. Then we run Gulp once and freely edit the index.jsx file and have the changes pick up automatically.
+To bring this all together, we need to get Gulp to watch our `index.jsx` file and call our `jsx` task whenever the file is touched. Then we run Gulp once and freely edit the `index.jsx` file and have the changes pick up automatically.
 
 ``` js
 var gulp = require('gulp')
@@ -362,7 +362,7 @@ console.log('Server running at http://localhost:1337/')
 Notice that in the `require` statement, we omit the file extension--the .js extension will be used automatically.  It's noteworthy that we've created the component as `Components/HelloWorld.jsx` but it will get transformed into `lib/Components/HelloWorld.js`.  Likewise, even though we're writing code in `index.jsx`, it will be running from `lib/index.js` where its relative path reference to `./Components/HelloWorld` will result in finding `lib/Components/HelloWorld.js`.  At first, I thought there would be some gymnastics or inconsistencies surfacing here, but since `require` assumes the `.js` file extension, it comes together pretty cleanly.
 
 ### Passing Properties to Components
-Let's pass some properties to the HelloWorld component now!
+Let's pass some properties to the `HelloWorld` component now!
 
 In `index.jsx`, we'll simply add an attribute to the `<HelloWorld>` tag.
 
@@ -410,7 +410,7 @@ module.exports = React.createClass({
 })
 ```
 
-There's a noteworthy React/JSX tip to talk about here: Parse Errror: "Adjacent JSX elements must be wrapped in an enclosing tag."
+There's a noteworthy React/JSX tip to talk about here: Parse Error: "Adjacent JSX elements must be wrapped in an enclosing tag."
 
 In the `HelloWorld.jsx` file, I initially used the following code, and it resulted in this Adjacent JSX elements error.
 
@@ -431,7 +431,7 @@ module.exports = React.createClass({
 })
 ```
 
-It took a few minutes to understand, but what was happening is the HelloWorld.jsx file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
+It took a few minutes to understand, but what was happening is the `HelloWorld.jsx` file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
 
 ### React on the Client
 On the server, we now have JSX automatically transforming into JS files, and we're using React to render a container page that uses a component, passing state into that component.  Now it's time to introduce React on the client!
@@ -448,7 +448,7 @@ var Timestamp = React.createClass({
 })
 ```
 
-This will serve as the foundation for our Timestamp component; we'll render this script inline within our HTML to start out.  To do that, we'll add the inline script to the response we're emitting from Node by editing the `index.jsx` file as follows.
+This will serve as the foundation for our `Timestamp` component; we'll render this script inline within our HTML to start out.  To do that, we'll add the inline script to the response we're emitting from Node by editing the `index.jsx` file as follows.
 
 ``` jsx
 var http = require('http')
@@ -464,7 +464,7 @@ http.createServer(function (req, res) {
                     <div id="reactContainer" />
                 </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
                 '</head>' +
                 '<script>' +
                 fs.readFileSync('./Components/Timestamp.js') +
@@ -477,7 +477,7 @@ http.createServer(function (req, res) {
 console.log('Server running at http://localhost:1337/')
 ```
 
-You might be wondering why we're not just referencing Timestamp.js through a `<script src="/Components/Timestamp.js"></script>` tag.  That's because we don't have any routing in place--all requests, regardless of URL, are getting the same response.  Don't worry though, we'll introduce some routing soon enough so that this file can get served up separately.
+You might be wondering why we're not just referencing `Timestamp.js` through a `<script src="/Components/Timestamp.js"></script>` tag.  That's because we don't have any routing in place--all requests, regardless of URL, are getting the same response.  Don't worry though, we'll introduce some routing soon enough so that this file can get served up separately.
 
 Okay, if you load the page with this in place you should see the inline JavaScript, but we're not doing anything with it yet.  Let's render this component using `React.render`.
 
@@ -495,7 +495,7 @@ http.createServer(function (req, res) {
                     <div id="reactContainer" />
                 </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
                 '</head>' +
                 '<script>' +
                 fs.readFileSync('./Components/Timestamp.js') +
@@ -557,7 +557,7 @@ http.createServer(function (req, res) {
                     <div id="reactContainer" />
                 </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
                 '</head>' +
                 '<script>' +
                 fs.readFileSync('./Components/Timestamp.js') +
@@ -575,14 +575,14 @@ http.createServer(function (req, res) {
 console.log('Server running at http://localhost:1337/')
 ```
 
-Running the page now, you'll see the "Initial State" message for a 1/2 second and then it will change to "Updated through setState" and the timestamp will continue updating.  We are now updating the client-side component's state and React is automatically re-rendering the component for us.  Yay!
+Running the page now, you'll see the "Initial State" message for a 1/2 second and then it will change to "Updated through setState" and the timestamp will continue updating.  We are now updating the client-side component's state and React is automatically re-rendering the component for us.  **Yay!**
 
 ### Some Basic Routing
-Okay, I've had enough of the HTML string building.  Let's get some basic routing in on the server so that we can serve files instead.  We'll use **Express** for that.
+Okay, I've had enough of the HTML string building.  Let's get some basic routing in on the server so that we can serve files instead.  We'll use `Express` for that.
 
 1. npm install express -save
 
-With Express installed, we can now get rid of our raw **http** code, spin up an Express server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `<script src="..."></script>` tag to get our Timestamp.js file down to the browser.  Here's what `index.jsx` looks like after those transformations.
+With `Express` installed, we can now get rid of our raw **http** code, spin up an `Express` server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `<script src="..."></script>` tag to get our `Timestamp.js` file down to the browser.  Here's what `index.jsx` looks like after those transformations.
 
 ``` jsx
 var React = require('react')
@@ -601,7 +601,7 @@ app.get('/', function (req, res) {
                     <div id="reactContainer" />
                 </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' + 
+        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
                 '<script src="/Components/Timestamp.js"></script>' +
                 '</head>' +
                 body +
@@ -620,9 +620,9 @@ console.log('Server running at http://localhost:1337/')
 
 Notes:
 
-* The `express.static` call is using `__dirname`, joined with `..`, and then joined with `Components`
-* This is because the *running* code is `/lib/index.js` and not the `/index.jsx`, so we have to correct the paths
-* Additionally, we're serving the static components to the browser to a `/Components` folder
+1. The `express.static` call is using `__dirname`, joined with `..`, and then joined with `Components`
+1. This is because the *running* code is `/lib/index.js` and not the `/index.jsx`, so we have to correct the paths
+1. Additionally, we're serving the static components to the browser to a `/Components` folder
 
 We're also obviously not yet rid of the HTML string building--let's do that now.
 
@@ -815,7 +815,7 @@ That was only a 1-line change for this component; not bad.  We'll change our `in
 Following the link to `/Components/Timestamp.jsx`, we also get confirmation that we sent actual JSX code down to the browser and the JSXTransformer component processed it like magic.
 
 ## Server-Side Processing of the JSX for Client Use
-We should go ahead and follow the warning's guidance though, and convert over to the other approach: Let's conver the JSX to JS on the server (as part of our build process), and get back to serving it as raw JavaScript instead of JSX.
+We should go ahead and follow the warning's guidance though, and convert over to the other approach: Let's convert the JSX to JS on the server (as part of our build process), and get back to serving it as raw JavaScript instead of JSX.
 
 If you were watching closely when you renamed `/Components/Timestamp.js` to `/Components/Timestamp.jsx`, you might have noticed that Gulp *already* did this work for us and `/lib/Components/Timestamp.js` showed up automatically!
 
@@ -885,7 +885,7 @@ We've successfully refactored the project to allow us to:
 1. Edit a client-side React Component using JSX syntax, but serve it to the browser as JavaScript
 1. Load that client-side react Component into our page, set its state on a timer, and watch React re-render
 
-### Going Isomorphic
+### Aiming for Isomorphic Functionality
 The last step for this project is to get our page into the "Isomorphic" functionality, where we render the page from the server but then let the client take over the server-rendered React components and update their state to re-render them.  We have two components to use for this stage: HelloWorld and Timestamp.  Let's start with HelloWorld.
 
 It's been a while since we've looked at HelloWorld, let's refresh our memories of what that component looks like.
