@@ -72,10 +72,37 @@ After killing the running Gulp process, ensuring the `/lib` folder is deleted, a
     /bin/Pages          - Page-specific script files ready for use in the browser
 </pre>
 
-We'll make a couple of little housekeeping changes to tidy things up.  In `/src/server.jsx`, we should change the message passed to the `<HelloWorld>` component.
+We'll make a couple of little housekeeping changes to tidy things up.  In `/src/server.jsx`, we should change the message passed to the `<HelloWorld>` component and also change the path to the script file to reflect the new structure, and also update our routes to handle requests to `/pages`.  The client will no longer make requests into our Components folder either, because the scripts needed from there get bundled into `/pages/index.js`, so we can remove that route.
 
 <pre class="brush: js">
-&lt;HelloWorld from="server.jsx, running on the server"&gt;&lt;/HelloWorld&gt;
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/pages', express.static(path.join(__dirname, 'Pages')))
+
+app.get('/', function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Hello World&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;HelloWorld from="server.jsx, running on the server" /&gt;
+        &lt;div id="reactContainer" /&gt;
+        &lt;div id="reactHelloContainer"&gt;&lt;/div&gt;
+      &lt;/body&gt;
+      &lt;script src="/pages/index.js"&gt;&lt;/script&gt;
+    &lt;/html&gt;)
+
+    res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
 </pre>
 
 And then in `/src/Pages/index.jsx`, we'll make a change to the message it passes to the HelloWorld component too.
