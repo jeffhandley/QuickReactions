@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
         &lt;script src="/Components/Timestamp.js" type="text/jsx"&gt;&lt;/script&gt;
       &lt;/head&gt;
       &lt;body&gt;
-        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;HelloWorld from="index.jsx on the server" /&gt;
         &lt;div id="reactContainer" /&gt;
       &lt;/body&gt;
       &lt;script src="/assets/index.js"&gt;&lt;/script&gt;

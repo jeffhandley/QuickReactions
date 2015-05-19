@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
       &lt;body&gt;
         &lt;div id="reactContainer" /&gt;
         &lt;div id="reactHelloContainer"&gt;
-          &lt;HelloWorld from="server.jsx, running on the server"&gt;&lt;/HelloWorld&gt;
+          &lt;HelloWorld from="server.jsx, running on the server" /&gt;
         &lt;/div&gt;
       &lt;/body&gt;
       &lt;script src="/pages/index.js"&gt;&lt;/script&gt;

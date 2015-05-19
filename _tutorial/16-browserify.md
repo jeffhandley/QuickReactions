@@ -94,7 +94,7 @@ app.get('/', function (req, res) {
         &lt;title&gt;Hello World&lt;/title&gt;
       &lt;/head&gt;
       &lt;body&gt;
-        &lt;HelloWorld from="index.jsx on the server"&gt;&lt;/HelloWorld&gt;
+        &lt;HelloWorld from="index.jsx on the server" /&gt;
         &lt;div id="reactContainer" /&gt;
         &lt;div id="reactHelloContainer"&gt;&lt;/div&gt;
       &lt;/body&gt;
