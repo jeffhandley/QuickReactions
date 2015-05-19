@@ -1,6 +1,6 @@
 # Quick Reactions
 
-**To view this in a step-by-step tutorial form, see [http://jeffhandley.github.io/QuickReactions](http://jeffhandley.github.io/QuickReactions)**
+##Tutorial Form: [http://jeffhandley.github.io/QuickReactions](http://jeffhandley.github.io/QuickReactions)##
 
 ## Isomorphic Hello World with React and Node
 
