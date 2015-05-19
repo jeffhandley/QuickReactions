@@ -26,8 +26,8 @@ Create `index.js` using the example webserver code from [https://nodejs.org](htt
 ``` js
 var http = require('http')
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end('<html><head><title>Hello World</title></head><body>index.js on the server</body></html>')
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end('<html><head><title>Hello World</title></head><body>index.js on the server</body></html>')
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -42,17 +42,17 @@ var http = require('http')
 var React = require('react')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>index.jsx compiled into index.js by hand on the server</body>
-            </html>
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      <html>
+        <head>
+          <title>Hello World</title>
+        </head>
+        <body>index.jsx compiled into index.js by hand on the server</body>
+      </html>
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -71,16 +71,16 @@ var http = require('http')
 var React = require('react')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            React.createElement("html", null,
-                React.createElement("head", null,
-                    React.createElement("title", null, "Hello World")
-                ),
-            React.createElement("body", null, "index.jsx compiled into index.js by hand on the server")
-        ))
-    )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      React.createElement("html", null,
+        React.createElement("head", null,
+          React.createElement("title", null, "Hello World")
+        ),
+      React.createElement("body", null, "index.jsx compiled into index.js by hand on the server")
+    ))
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -91,10 +91,10 @@ If you view source in the browser, you'll see something like the following.
 
 ``` html
 <html data-reactid=".qa6th1tqf4" data-react-checksum="-1942403816">
-    <head data-reactid=".qa6th1tqf4.0">
-        <title data-reactid=".qa6th1tqf4.0.0">Hello World</title>
-    </head>
-    <body data-reactid=".qa6th1tqf4.1">index.jsx compiled into index.js by hand on the server</body>
+  <head data-reactid=".qa6th1tqf4.0">
+    <title data-reactid=".qa6th1tqf4.0.0">Hello World</title>
+  </head>
+  <body data-reactid=".qa6th1tqf4.1">index.jsx compiled into index.js by hand on the server</body>
 </html>
 ```
 
@@ -122,36 +122,36 @@ var gulp = require('gulp')
   , reactTools = require('react-tools')
 
 var transform = function(srcFile, destFile, cb) {
-    console.log('Reading %s...', srcFile)
+  console.log('Reading %s...', srcFile)
 
-    var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
-        if (readErr) {
-            cb(readErr)
+  var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
+    if (readErr) {
+      cb(readErr)
+    }
+    else {
+      console.log('Writing %s', destFile)
+      fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
+        if (writeErr) {
+          cb(writeErr)
         }
         else {
-            console.log('Writing %s', destFile)
-            fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
-                if (writeErr) {
-                    cb(writeErr)
-                }
-                else {
-                    cb()
-                }
-            })
+          cb()
         }
-    })
+      })
+    }
+  })
 }
 
 gulp.task('jsx', function(cb) {
-    fs.mkdir('./lib', function(err) {
-        transform('index.jsx', './lib/index.js', function(err) {
-            cb(err)
-        })
+  fs.mkdir('./lib', function(err) {
+    transform('index.jsx', './lib/index.js', function(err) {
+      cb(err)
     })
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('jsx')
+  gulp.start('jsx')
 })
 ```
 
@@ -164,40 +164,40 @@ var gulp = require('gulp')
   , spawn = require('child_process').spawn
 
 var transform = function(srcFile, destFile, cb) {
-    console.log('Reading %s...', srcFile)
+  console.log('Reading %s...', srcFile)
 
-    var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
-        if (readErr) {
-            cb(readErr)
+  var src = fs.readFile(srcFile, {encoding: 'utf8'}, function(readErr, data) {
+    if (readErr) {
+      cb(readErr)
+    }
+    else {
+      console.log('Writing %s', destFile)
+      fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
+        if (writeErr) {
+          cb(writeErr)
         }
         else {
-            console.log('Writing %s', destFile)
-            fs.writeFile(destFile, reactTools.transform(data), function(writeErr) {
-                if (writeErr) {
-                    cb(writeErr)
-                }
-                else {
-                    cb()
-                }
-            })
+          cb()
         }
-    })
+      })
+    }
+  })
 }
 
 gulp.task('jsx', function(cb) {
-    fs.mkdir('./lib', function(err) {
-        transform('index.jsx', './lib/index.js', function(err) {
-            cb(err)
-        })
+  fs.mkdir('./lib', function(err) {
+    transform('index.jsx', './lib/index.js', function(err) {
+      cb(err)
     })
+  })
 })
 
 gulp.task('node', ['jsx'], function() {
-    spawn('node', ['./lib/index.js'], { stdio: 'inherit'})
+  spawn('node', ['./lib/index.js'], { stdio: 'inherit'})
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 ```
 
@@ -213,13 +213,13 @@ var gulp = require('gulp')
   , gulpReact = require('gulp-react')
 
 gulp.task('jsx', function() {
-    return gulp.src('*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('lib'))
 })
 
 gulp.task('default', function() {
-    gulp.start('jsx')
+  gulp.start('jsx')
 })
 ```
 
@@ -235,20 +235,20 @@ var gulp = require('gulp')
   , gulpNodemon = require('gulp-nodemon')
 
 gulp.task('jsx', function() {
-    return gulp.src('*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('lib'))
 })
 
 gulp.task('node', ['jsx'], function() {
-    gulpNodemon({
-        script: 'lib/index.js',
-        ext: 'js'
-    })
+  gulpNodemon({
+    script: 'lib/index.js',
+    ext: 'js'
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 ```
 
@@ -263,27 +263,27 @@ var gulp = require('gulp')
   , gulpWatch = require('gulp-watch')
 
 gulp.task('watch-jsx', ['jsx'], function() {
-    gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
-        gulp.start('jsx')
-    })
+  gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
+    gulp.start('jsx')
+  })
 })
 
 gulp.task('jsx', function() {
-    return gulp.src('**/*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('**/*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('lib'))
 })
 
 gulp.task('node', ['watch-jsx'], function() {
-    gulpNodemon({
-        script: 'lib/index.js',
-        ignore: ['gulpfile.js'],
-        ext: 'js jsx'
-    })
+  gulpNodemon({
+    script: 'lib/index.js',
+    ignore: ['gulpfile.js'],
+    ext: 'js jsx'
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 ```
 
@@ -294,20 +294,20 @@ var http = require('http')
 var React = require('react')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>
-                    index.jsx, automatically processed through gulp and gulp-react,
-                    with node automatically restarted through gulp-nodemon!
-                </body>
-            </html>
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      <html>
+        <head>
+          <title>Hello World</title>
+        </head>
+        <body>
+          index.jsx, automatically processed through gulp and gulp-react,
+          with node automatically restarted through gulp-nodemon!
+        </body>
+      </html>
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -321,13 +321,13 @@ Here is the component we'll create as the `Components/HelloWorld.jsx` file.
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            <div>
-                This is from the HelloWorld.jsx component's render function.
-            </div>
-        )
-    }
+  render: function() {
+    return (
+      <div>
+        This is from the HelloWorld.jsx component's render function.
+      </div>
+    )
+  }
 })
 ```
 
@@ -339,22 +339,22 @@ var http = require('http')
   , HelloWorld = require('./Components/HelloWorld')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>
-                    <HelloWorld />
-                    <div>
-                        Rendered from the Server!
-                    </div>
-                </body>
-            </html>
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      <html>
+        <head>
+          <title>Hello World</title>
+        </head>
+        <body>
+          <HelloWorld />
+          <div>
+            Rendered from the Server!
+          </div>
+        </body>
+      </html>
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -372,19 +372,19 @@ var http = require('http')
   , HelloWorld = require('./Components/HelloWorld')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    res.end(
-        React.renderToString(
-            <html>
-                <head>
-                    <title>Hello World</title>
-                </head>
-                <body>
-                    <HelloWorld from="index.jsx on the server" />
-                </body>
-            </html>
-        )
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  res.end(
+    React.renderToString(
+      <html>
+        <head>
+          <title>Hello World</title>
+        </head>
+        <body>
+          <HelloWorld from="index.jsx on the server" />
+        </body>
+      </html>
     )
+  )
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
 ```
@@ -395,18 +395,18 @@ Within the `Components/HelloWorld.jsx`, we'll make use of that `from` property.
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <div>
-                    This is from the HelloWorld.jsx component's render function.
-                </div>
-                <div>
-                    Rendered from: {this.props.from}
-                </div>
-            </div>
-        )
-    }
+  render: function() {
+    return (
+      <div>
+        <div>
+          This is from the HelloWorld.jsx component's render function.
+        </div>
+        <div>
+          Rendered from: {this.props.from}
+        </div>
+      </div>
+    )
+  }
 })
 ```
 
@@ -418,16 +418,16 @@ In the `HelloWorld.jsx` file, I initially used the following code, and it result
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            <div>
-                This is from the HelloWorld.jsx component's render function.
-            </div>
-            <div>
-                Rendered from: {this.props.from}
-            </div>
-        )
-    }
+  render: function() {
+    return (
+      <div>
+        This is from the HelloWorld.jsx component's render function.
+      </div>
+      <div>
+        Rendered from: {this.props.from}
+      </div>
+    )
+  }
 })
 ```
 
@@ -442,9 +442,9 @@ Just like we did on the server, we'll start off using React on the client *witho
 
 ``` js
 var Timestamp = React.createClass({
-    render: function() {
-        return React.createElement("div", null, new Date().toString())
-    }
+  render: function() {
+    return React.createElement("div", null, new Date().toString())
+  }
 })
 ```
 
@@ -457,21 +457,21 @@ var http = require('http')
   , fs = require('fs')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                <body>
-                    <HelloWorld from="index.jsx on the server"></HelloWorld>
-                    <div id="reactContainer" />
-                </body>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        <body>
+          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <div id="reactContainer" />
+        </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
-                '</head>' +
-                '<script>' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '</script>' +
-                body +
-                '</html>'
-        )
+    res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
+        '</head>' +
+        '<script>' +
+        fs.readFileSync('./Components/Timestamp.js') +
+        '</script>' +
+        body +
+        '</html>'
+    )
 
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -488,25 +488,25 @@ var http = require('http')
   , fs = require('fs')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                <body>
-                    <HelloWorld from="index.jsx on the server"></HelloWorld>
-                    <div id="reactContainer" />
-                </body>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        <body>
+          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <div id="reactContainer" />
+        </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
-                '</head>' +
-                '<script>' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '</script>' +
-                body +
-                '<script>' +
-                'var timestampInstance = React.createFactory(Timestamp)();' +
-                'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
-                '</script>' +
-                '</html>'
-        )
+    res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
+        '</head>' +
+        '<script>' +
+        fs.readFileSync('./Components/Timestamp.js') +
+        '</script>' +
+        body +
+        '<script>' +
+        'var timestampInstance = React.createFactory(Timestamp)();' +
+        'setInterval(function() { React.render(timestampInstance, document.getElementById("reactContainer")) }, 500)' +
+        '</script>' +
+        '</html>'
+    )
 
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -532,12 +532,12 @@ I tried them in that order and of course the correct answer was the last option.
 
 ``` js
 var Timestamp = React.createClass({
-    getInitialState: function() {
-        return { date: "Initial State: " + new Date().toString() }
-    },
-    render: function() {
-        return React.createElement("div", null, this.state.date)
-    }
+  getInitialState: function() {
+    return { date: "Initial State: " + new Date().toString() }
+  },
+  render: function() {
+    return React.createElement("div", null, this.state.date)
+  }
 })
 ```
 
@@ -550,26 +550,26 @@ var http = require('http')
   , fs = require('fs')
 
 http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                <body>
-                    <HelloWorld from="index.jsx on the server"></HelloWorld>
-                    <div id="reactContainer" />
-                </body>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        <body>
+          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <div id="reactContainer" />
+        </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
-                '</head>' +
-                '<script>' +
-                fs.readFileSync('./Components/Timestamp.js') +
-                '</script>' +
-                body +
-                '<script>' +
-                'var timestampInstance = React.createFactory(Timestamp)();' +
-                'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
-                'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
-                '</script>' +
-                '</html>'
-        )
+    res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
+        '</head>' +
+        '<script>' +
+        fs.readFileSync('./Components/Timestamp.js') +
+        '</script>' +
+        body +
+        '<script>' +
+        'var timestampInstance = React.createFactory(Timestamp)();' +
+        'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
+        'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
+        '</script>' +
+        '</html>'
+    )
 
 }).listen(1337)
 console.log('Server running at http://localhost:1337/')
@@ -594,24 +594,24 @@ var app = express()
 app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var body = React.renderToString(
-                <body>
-                    <HelloWorld from="index.jsx on the server"></HelloWorld>
-                    <div id="reactContainer" />
-                </body>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var body = React.renderToString(
+        <body>
+          <HelloWorld from="index.jsx on the server"></HelloWorld>
+          <div id="reactContainer" />
+        </body>)
 
-        res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
-                '<script src="/Components/Timestamp.js"></script>' +
-                '</head>' +
-                body +
-                '<script>' +
-                'var timestampInstance = React.createFactory(Timestamp)();' +
-                'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
-                'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
-                '</script>' +
-                '</html>'
-        )
+    res.end('<html><head><title>Hello World</title><script src="//fb.me/react-0.13.1.js"></script>' +
+        '<script src="/Components/Timestamp.js"></script>' +
+        '</head>' +
+        body +
+        '<script>' +
+        'var timestampInstance = React.createFactory(Timestamp)();' +
+        'var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));' +
+        'setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)' +
+        '</script>' +
+        '</html>'
+    )
 })
 
 app.listen(1337)
@@ -640,27 +640,27 @@ var app = express()
 app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Components')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var elementCode = 'var timestampElement = React.render(timestampInstance, document.getElementById(\'reactContainer\'))'
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                        <script src="//fb.me/react-0.13.1.js"></script>
-                        <script src="/Components/Timestamp.js"></script>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                    </body>
-                    <script>
-                        var timestampInstance = React.createFactory(Timestamp)();
-                        var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
-                        setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
-                    </script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var elementCode = 'var timestampElement = React.render(timestampInstance, document.getElementById(\'reactContainer\'))'
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+            <script src="//fb.me/react-0.13.1.js"></script>
+            <script src="/Components/Timestamp.js"></script>
+          </head>
+          <body>
+            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <div id="reactContainer" />
+          </body>
+          <script>
+            var timestampInstance = React.createFactory(Timestamp)();
+            var timestampElement = React.render(timestampInstance, document.getElementById("reactContainer"));
+            setInterval(function() { timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) }, 500)
+          </script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -698,22 +698,22 @@ app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Com
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                        <script src="//fb.me/react-0.13.1.js"></script>
-                        <script src="/Components/Timestamp.js"></script>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                    </body>
-                    <script src="/assets/index.js"></script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+            <script src="//fb.me/react-0.13.1.js"></script>
+            <script src="/Components/Timestamp.js"></script>
+          </head>
+          <body>
+            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <div id="reactContainer" />
+          </body>
+          <script src="/assets/index.js"></script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -745,23 +745,23 @@ app.use('/Components', express.static(path.join(path.join(__dirname, '..'), 'Com
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                        <script src="//fb.me/react-0.13.1.js"></script>
-                        <script src="//fb.me/JSXTransformer-0.13.1.js"></script>
-                        <script src="/Components/Timestamp.js" type="text/jsx"></script>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                    </body>
-                    <script src="/assets/index.js"></script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+            <script src="//fb.me/react-0.13.1.js"></script>
+            <script src="//fb.me/JSXTransformer-0.13.1.js"></script>
+            <script src="/Components/Timestamp.js" type="text/jsx"></script>
+          </head>
+          <body>
+            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <div id="reactContainer" />
+          </body>
+          <script src="/assets/index.js"></script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -793,12 +793,12 @@ After renaming `/Components/Timestamp.js` to `/Components/Timestamp.jsx`, its co
 
 ``` jsx
 var Timestamp = React.createClass({
-    getInitialState: function() {
-        return { date: "Initial State: " + new Date().toString() }
-    },
-    render: function() {
-        return <div>{this.state.date}</div>
-    }
+  getInitialState: function() {
+    return { date: "Initial State: " + new Date().toString() }
+  },
+  render: function() {
+    return <div>{this.state.date}</div>
+  }
 })
 ```
 
@@ -823,15 +823,15 @@ This happened because of the "jsx" and "watch-jsx" Gulp tasks that we configured
 
 ``` js
 gulp.task('watch-jsx', ['jsx'], function() {
-    gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
-        gulp.start('jsx')
-    })
+  gulpWatch('**/*.jsx', { ignored: 'lib/' }, function() {
+    gulp.start('jsx')
+  })
 })
 
 gulp.task('jsx', function() {
-    return gulp.src('**/*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('**/*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('lib'))
 })
 ```
 
@@ -855,22 +855,22 @@ app.use('/Components', express.static(path.join(__dirname, 'Components')))
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                        <script src="//fb.me/react-0.13.1.js"></script>
-                        <script src="/Components/Timestamp.js"></script>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                    </body>
-                    <script src="/assets/index.js"></script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+            <script src="//fb.me/react-0.13.1.js"></script>
+            <script src="/Components/Timestamp.js"></script>
+          </head>
+          <body>
+            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <div id="reactContainer" />
+          </body>
+          <script src="/assets/index.js"></script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -894,18 +894,18 @@ It's been a while since we've looked at HelloWorld, let's refresh our memories o
 var React = require('react')
 
 module.exports = React.createClass({
-    render: function() {
-        return (
-            <div>
-                <div>
-                    This is from the HelloWorld.jsx component's render function.
-                </div>
-                <div>
-                    Rendered from: {this.props.from}
-                </div>
-            </div>
-        )
-    }
+  render: function() {
+    return (
+      <div>
+        <div>
+          This is from the HelloWorld.jsx component's render function.
+        </div>
+        <div>
+          Rendered from: {this.props.from}
+        </div>
+      </div>
+    )
+  }
 })
 ```
 
@@ -915,21 +915,21 @@ Okay, cool - this component already has a placeholder for where it was rendered 
 var React = require('react')
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        return { from: this.props.from }
-    },
-    render: function() {
-        return (
-            <div>
-                <div>
-                    This is from the HelloWorld.jsx component's render function.
-                </div>
-                <div>
-                    Rendered from: {this.state.from}
-                </div>
-            </div>
-        )
-    }
+  getInitialState: function() {
+    return { from: this.props.from }
+  },
+  render: function() {
+    return (
+      <div>
+        <div>
+          This is from the HelloWorld.jsx component's render function.
+        </div>
+        <div>
+          Rendered from: {this.state.from}
+        </div>
+      </div>
+    )
+  }
 })
 ```
 
@@ -953,22 +953,22 @@ With Browserify installed, the next step will be to rearrange our code so that w
 Here are the module consumption scenarios we have:
 
 1. `/assets/index.js` needs:
-    1. React
-    1. HelloWorld
-    1. Timestamp
+  1. React
+  1. HelloWorld
+  1. Timestamp
 1. HelloWorld needs:
-    React
+  React
 1. Timestamp needs:
-    React
+  React
 
 That's not too bad.  But we do have another detail to worry about--we're coding HelloWorld and Timestamp using JSX that is getting transformed to JavaScript.  Browserify can handle transforms, and we'll use that feature shortly, but let's just get this hacked together for a moment (one step at a time).
 
 Here's the approach we'll take in this (temporary) approach:
 
 1. Modify `/Components/Timestamp.jsx` to export its React class using `module.exports`
-    1. `/Components/HelloWorld.jsx` is already doing this
+  1. `/Components/HelloWorld.jsx` is already doing this
 1. Modify `/assets/index.js` to use `require` statements for React, HelloWorld, and Timestamp
-    1. Require HelloWorld and Timestamp using relative paths from `/assets` to `/lib/Components' where the JS files have already been transformed from JSX
+  1. Require HelloWorld and Timestamp using relative paths from `/assets` to `/lib/Components' where the JS files have already been transformed from JSX
 1. Update our `gulpfile.js` to introduce a new "client-scripts" task for running browserify on `/assets/index.js`
 
 Here's what `/Components/Timestamp.jsx` gets edited to.
@@ -977,12 +977,12 @@ Here's what `/Components/Timestamp.jsx` gets edited to.
 var React = require('react')
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        return { date: "Initial State: " + new Date().toString() }
-    },
-    render: function() {
-        return <div>{this.state.date}</div>
-    }
+  getInitialState: function() {
+    return { date: "Initial State: " + new Date().toString() }
+  },
+  render: function() {
+    return <div>{this.state.date}</div>
+  }
 })
 ```
 
@@ -1014,21 +1014,21 @@ app.use('/Components', express.static(path.join(__dirname, 'Components')))
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                    </head>
-                    <body>
-                        <HelloWorld from="index.jsx on the server"></HelloWorld>
-                        <div id="reactContainer" />
-                        <div id="reactHelloContainer"></div>
-                    </body>
-                    <script src="/assets/index.js"></script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+          </head>
+          <body>
+            <HelloWorld from="index.jsx on the server"></HelloWorld>
+            <div id="reactContainer" />
+            <div id="reactHelloContainer"></div>
+          </body>
+          <script src="/assets/index.js"></script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -1040,10 +1040,10 @@ This should put all of the pieces in place for us:
 1. `/Components/Timestamp.jsx` uses `require` to get React
 1. `/Components/Timestamp.jsx` uses `module.exports` to export itself
 1. `Timestamp.jsx` and `HelloWorld.jsx` are already getting transformed into raw JavaScript
-    1. The result gets written to `/lib/Components/`
+  1. The result gets written to `/lib/Components/`
 1. `/assets/index.js` uses `require` to get React, HelloWorld, and Timestamp
-    1. It renders a Timestamp component into `<div id="reactContainer">`
-    1. It renders a HelloWorld component into `<div id="ReactHelloContainer">`
+  1. It renders a Timestamp component into `<div id="reactContainer">`
+  1. It renders a HelloWorld component into `<div id="ReactHelloContainer">`
 
 And as a reminder, there are a few other moving parts:
 
@@ -1064,33 +1064,33 @@ var gulp = require('gulp')
   , browserify = require('browserify')
 
 gulp.task('watch-jsx', ['client-scripts'], function() {
-    gulpWatch(['**/*.jsx', 'assets/*.js'], { ignored: 'lib/' }, function() {
-        gulp.start('client-scripts')
-    })
+  gulpWatch(['**/*.jsx', 'assets/*.js'], { ignored: 'lib/' }, function() {
+    gulp.start('client-scripts')
+  })
 })
 
 gulp.task('jsx', function() {
-    return gulp.src('**/*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('lib'))
+  return gulp.src('**/*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('lib'))
 })
 
 gulp.task('client-scripts', ['jsx'], function() {
   return browserify('./assets/index.js').bundle()
-    .pipe(source('index.js'))
-    .pipe(gulp.dest('lib/assets'))
+  .pipe(source('index.js'))
+  .pipe(gulp.dest('lib/assets'))
 })
 
 gulp.task('node', ['client-scripts', 'watch-jsx'], function() {
-    gulpNodemon({
-        script: 'lib/index.js',
-        ignore: ['gulpfile.js'],
-        ext: 'js jsx'
-    })
+  gulpNodemon({
+    script: 'lib/index.js',
+    ignore: ['gulpfile.js'],
+    ext: 'js jsx'
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 ```
 
@@ -1100,9 +1100,9 @@ Here are some notes on this step:
 1. We created a new 'client-scripts' task that depends on the output of the 'jsx' task
 1. That task uses `browserify('./assets/index.js').bundle()` to create the bundle
 1. We need to specify the source file name on the stream that gulp uses
-    1. This is done using the `.pipe(source('index.js'))` statement
-    1. That step required running `npm install vinyl-source-stream --save-dev`
-    1. And then we also added the `require('vinyl-source-stream')` to use it
+  1. This is done using the `.pipe(source('index.js'))` statement
+  1. That step required running `npm install vinyl-source-stream --save-dev`
+  1. And then we also added the `require('vinyl-source-stream')` to use it
 1. We then pipe the output of the gulp bundle's stream using `.pipe(gulp.dest('lib/assets'))
 1. The 'node' task now depends on 'client-scripts'
 1. The 'watch-jsx' task also depends on 'client-scripts'
@@ -1137,13 +1137,13 @@ Rendered from: From the client
 I'll admit, this was a lot of work--more than I expected it to be.  And I'm not very happy with the folder layout that we've arrived at:
 
 ```
-    /assets     - meant for public js/css/image assets
-                - now it's a source folder for JavaScript files to be run through Browserify
-                - files have to know to use relative path require() statements to get to ../lib
-    /Components - JSX-based React components
-                - also a source folder where contents will be run through gulp-react
-    /lib        - build output from Browserify and gulp-react
-    /           - includes index.jsx, which is a source file that runs through gulp-react
+  /assets   - meant for public js/css/image assets
+        - now it's a source folder for JavaScript files to be run through Browserify
+        - files have to know to use relative path require() statements to get to ../lib
+  /Components - JSX-based React components
+        - also a source folder where contents will be run through gulp-react
+  /lib    - build output from Browserify and gulp-react
+  /       - includes index.jsx, which is a source file that runs through gulp-react
 ```
 
 Before we go any further, we'll want to clean this structure up a bit.
@@ -1155,11 +1155,11 @@ Here's what I did to achieve a structure that I'm able to grasp a bit better.
 1. Create a `/src` folder that will hold source files that will be built/transformed
 1. Move the `/Components` folder to `/src/Components`
 1. Move the `/assets/index.js` file to `/src/Pages/index.jsx`
-    - We introduced 'Pages' here because that's really what this file was for--page-specific scripts
-    - Renaming to a .jsx file positions us for using JSX too, even though we're not yet doing so
+  - We introduced 'Pages' here because that's really what this file was for--page-specific scripts
+  - Renaming to a .jsx file positions us for using JSX too, even though we're not yet doing so
 1. Move the `/index.jsx` file to `/src/server.jsx`
-    - "server" is really a more appropriate name
-    - We'll reserve "index" for pages
+  - "server" is really a more appropriate name
+  - We'll reserve "index" for pages
 1. Delete the `/lib` folder to get rid of the stale files that were generated
 1. Create a `/bin` folder that we'll start to use instead of `/lib`
 
@@ -1174,54 +1174,81 @@ var gulp = require('gulp')
   , browserify = require('browserify')
 
 gulp.task('watch-jsx', ['build'], function() {
-    gulpWatch('src/**/*.jsx', { ignored: 'bin/' }, function() {
-        gulp.start('build')
-    })
+  gulpWatch('src/**/*.jsx', { ignored: 'bin/' }, function() {
+    gulp.start('build')
+  })
 })
 
 gulp.task('jsx', function() {
-    return gulp.src('src/**/*.jsx')
-               .pipe(gulpReact())
-               .pipe(gulp.dest('bin'))
+  return gulp.src('src/**/*.jsx')
+         .pipe(gulpReact())
+         .pipe(gulp.dest('bin'))
 })
 
 gulp.task('build', ['client-scripts'])
 
 gulp.task('client-scripts', ['jsx'], function() {
   return browserify('./bin/Pages/index.js').bundle()
-    .pipe(source('index.js'))
-    .pipe(gulp.dest('bin/Pages'))
+  .pipe(source('index.js'))
+  .pipe(gulp.dest('bin/Pages'))
 })
 
 gulp.task('node', ['client-scripts', 'watch-jsx'], function() {
-    gulpNodemon({
-        script: 'bin/server.js',
-        ignore: ['gulpfile.js'],
-        ext: 'js jsx'
-    })
+  gulpNodemon({
+    script: 'bin/server.js',
+    ignore: ['gulpfile.js'],
+    ext: 'js jsx'
+  })
 })
 
 gulp.task('default', function() {
-    gulp.start('node')
+  gulp.start('node')
 })
 ```
 
 After killing the running Gulp process, ensuring the `/lib` folder is deleted, and restarting Gulp, everything should be back to working.  This gives us a new structure that will be easier to work with.
 
 ```
-    /                   - Configuration and other general files
-    /src                - Source files that will be built/transformed
-    /src/Components     - React JSX components
-    /src/Pages          - Script files with page-specific code
-    /bin                - Build/transform output
-    /bin/Components     - React components after JSX transform
-    /bin/Pages          - Page-specific script files ready for use in the browser
+  /           - Configuration and other general files
+  /src        - Source files that will be built/transformed
+  /src/Components   - React JSX components
+  /src/Pages      - Script files with page-specific code
+  /bin        - Build/transform output
+  /bin/Components   - React components after JSX transform
+  /bin/Pages      - Page-specific script files ready for use in the browser
 ```
 
-We'll make a couple of little housekeeping changes to tidy things up.  In `/src/server.jsx`, we should change the message passed to the `<HelloWorld>` component.
+We'll make a couple of little housekeeping changes to tidy things up.  In `/src/server.jsx`, we should change the message passed to the `<HelloWorld>` component and also change the path to the script file to reflect the new structure, and also update our routes to handle requests to `/pages`.  The client will no longer make requests into our Components folder either, because the scripts needed from there get bundled into `/pages/index.js`, so we can remove that route.
 
 ``` jsx
-<HelloWorld from="server.jsx, running on the server"></HelloWorld>
+var React = require('react')
+  , HelloWorld = require('./Components/HelloWorld')
+  , express = require('express')
+  , path = require('path')
+
+var app = express()
+app.use('/pages', express.static(path.join(__dirname, 'Pages')))
+
+app.get('/', function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+    <html>
+      <head>
+        <title>Hello World</title>
+      </head>
+      <body>
+        <HelloWorld from="server.jsx, running on the server" />
+        <div id="reactContainer" />
+        <div id="reactHelloContainer"></div>
+      </body>
+      <script src="/pages/index.js"></script>
+    </html>)
+
+    res.end(html)
+})
+
+app.listen(1337)
+console.log('Server running at http://localhost:1337/')
 ```
 
 And then in `/src/Pages/index.jsx`, we'll make a change to the message it passes to the HelloWorld component too.
@@ -1247,16 +1274,16 @@ var HelloWorld = require('../Components/HelloWorld')
 var Timestamp = require('../Components/Timestamp')
 
 React.render(
-    <HelloWorld from='index.jsx, transformed, bundled, and running on the client' />,
-    document.getElementById('reactHelloContainer'))
+  <HelloWorld from='index.jsx, transformed, bundled, and running on the client' />,
+  document.getElementById('reactHelloContainer'))
 
 var timestampElement = React.render(
-    <Timestamp />,
-    document.getElementById('reactContainer'))
+  <Timestamp />,
+  document.getElementById('reactContainer'))
 
 setInterval(function() {
-    timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) },
-    500)
+  timestampElement.setState({ date: "Updated through setState: " + new Date().toString() }) },
+  500)
 ```
 
 Just to make sure this actually worked, the `<HelloWorld>` message was changed slightly. But yeah, this worked like a charm!
@@ -1289,22 +1316,22 @@ var app = express()
 app.use('/pages', express.static(path.join(__dirname, 'Pages')))
 
 app.get('/', function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'})
-    var html = React.renderToString(
-                <html>
-                    <head>
-                        <title>Hello World</title>
-                    </head>
-                    <body>
-                        <div id="reactContainer" />
-                        <div id="reactHelloContainer">
-                            <HelloWorld from="server.jsx, running on the server"></HelloWorld>
-                        </div>
-                    </body>
-                    <script src="/pages/index.js"></script>
-                </html>)
+  res.writeHead(200, {'Content-Type': 'text/html'})
+  var html = React.renderToString(
+        <html>
+          <head>
+            <title>Hello World</title>
+          </head>
+          <body>
+            <div id="reactContainer" />
+            <div id="reactHelloContainer">
+              <HelloWorld from="server.jsx, running on the server"></HelloWorld>
+            </div>
+          </body>
+          <script src="/pages/index.js"></script>
+        </html>)
 
-        res.end(html)
+    res.end(html)
 })
 
 app.listen(1337)
@@ -1317,22 +1344,22 @@ Well, the test for that is easy: **View Source**.
 
 ``` html
 <html data-reactid=".1hcyssffzeo" data-react-checksum="1801386867">
-    <head data-reactid=".1hcyssffzeo.0">
-        <title data-reactid=".1hcyssffzeo.0.0">Hello World</title>
-    </head>
-    <body data-reactid=".1hcyssffzeo.1">
-        <div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"></div>
-        <div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1">
-            <div data-reactid=".1hcyssffzeo.1.1.0">
-                <div data-reactid=".1hcyssffzeo.1.1.0.0">This is from the HelloWorld.jsx component&#x27;s render function.</div>
-                <div data-reactid=".1hcyssffzeo.1.1.0.1">
-                    <span data-reactid=".1hcyssffzeo.1.1.0.1.0">Rendered from: </span>
-                    <span data-reactid=".1hcyssffzeo.1.1.0.1.1">server.jsx, running on the server</span>
-                </div>
-            </div>
+  <head data-reactid=".1hcyssffzeo.0">
+    <title data-reactid=".1hcyssffzeo.0.0">Hello World</title>
+  </head>
+  <body data-reactid=".1hcyssffzeo.1">
+    <div id="reactContainer" data-reactid=".1hcyssffzeo.1.0"></div>
+    <div id="reactHelloContainer" data-reactid=".1hcyssffzeo.1.1">
+      <div data-reactid=".1hcyssffzeo.1.1.0">
+        <div data-reactid=".1hcyssffzeo.1.1.0.0">This is from the HelloWorld.jsx component&#x27;s render function.</div>
+        <div data-reactid=".1hcyssffzeo.1.1.0.1">
+          <span data-reactid=".1hcyssffzeo.1.1.0.1.0">Rendered from: </span>
+          <span data-reactid=".1hcyssffzeo.1.1.0.1.1">server.jsx, running on the server</span>
         </div>
-    </body>
-    <script src="/pages/index.js" data-reactid=".1hcyssffzeo.2"></script>
+      </div>
+    </div>
+  </body>
+  <script src="/pages/index.js" data-reactid=".1hcyssffzeo.2"></script>
 </html>
 ```
 
