@@ -854,7 +854,7 @@ var React = require('react')
   , path = require('path')
 
 var app = express()
-app.use('/Components', express.static(path.join(__dirname, 'Components')))
+app.use('/lib/Components', express.static(path.join(__dirname, 'lib/Components')))
 app.use('/assets', express.static(path.join(path.join(__dirname, '..'), 'assets')))
 
 app.get('/', function (req, res) {
