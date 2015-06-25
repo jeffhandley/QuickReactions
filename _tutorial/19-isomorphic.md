@@ -86,6 +86,16 @@ We can see that the HelloWorld component clearly contained the "server.jsx, runn
 
 *This is now an isomorphic app!*
 
-For one last illustration to see that this is working, you can disable JavaScript (Chrome's developer tools has a handy checkbox for that), refresh the page, and see only the server-rendered HelloWorld message.  The Timestamp won't render and the HelloWorld message won't change to the client's message.
+For an illustration to prove that this is working, you can disable JavaScript (Chrome's developer tools has a handy checkbox for that), refresh the page, and see only the server-rendered HelloWorld message.  The Timestamp won't render and the HelloWorld message won't change to the client's message.
 
-[Finished » References](references)
+When you open up the JavaScript console though, you might see that we actually have a warning from React:
+
+<pre>
+Warning: React attempted to reuse markup in a container but the checksum was invalid. This generally means that you are using server rendering and the markup generated on the server was not what the client was expecting. React injected new markup to compensate which works but you have lost many of the benefits of server rendering. Instead, figure out why the markup being generated is different on the client or server:
+ (client) reactid=".egwbkqfnr4"&gt;&lt;div data-reactid=
+ (server) reactid=".egwbkqfnr4.1.1.0"&gt;&lt;div data-re
+</pre>
+
+Uh-oh. We actually have one final problem. Our isomorphic application is not getting the benefits of a cheap client-side re-render because the component tree is different between the server and the client.  We'll complete one last cleanup step to fix this though.
+
+[Next » Final Cleanup](20-final-cleanup)
