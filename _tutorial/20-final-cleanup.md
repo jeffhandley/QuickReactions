@@ -66,7 +66,7 @@ module.exports = React.createClass({
                 &lt;body&gt;
                     &lt;div id="reactContainer" /&gt;
                     &lt;div id="reactHelloContainer"
-                        dangerouslySetInnerHTML=\{ \{__html: this.props.content\}\ } /&gt;
+                        dangerouslySetInnerHTML={ {__html: this.props.content} } /&gt;
                 &lt;/body&gt;
                 &lt;script src="/pages/index.js"&gt;&lt;/script&gt;
             &lt;/html&gt;
@@ -77,7 +77,7 @@ module.exports = React.createClass({
 
 This component came over from `server.jsx` almost verbatim--there's just one critical difference.  Where we previously had the `<HelloWorld>` component within the `reactHelloContainer`, we have removed that and added some code.
 
-`<div id="reactHelloContainer" dangerouslySetInnerHTML=\{ \{__html: this.props.content\} \} />`
+`<div id="reactHelloContainer" dangerouslySetInnerHTML={ {__html: this.props.content} } />`
 
 Let's examine this:
 
