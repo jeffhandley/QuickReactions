@@ -9,7 +9,7 @@ With this restructuring in place, and with Browserify building `/src/Pages/index
 1. The 'jsx' task transforms it and writes the output to `/bin/Pages/index.js`
 1. The 'client-scripts' task runs Browserify on `/bin/Pages/index.js` and overwrites that file with the output
 
-For clear illustration of this, we can temporarily update `gulpfile.js` so that the output of the 'client-scripts' task goes to `/bin/Pages/bundles'.  We can then see that the intermediate output is written to `/bin/Pages/index.js' and the bundled output goes to `/bin/Pages/bundles/index.js`.  Now that we get that, we can revert the change though.
+For clear illustration of this, we can temporarily update `gulpfile.js` so that the output of the 'client-scripts' task goes to `/bin/Pages/bundles`.  We can then see that the intermediate output is written to `/bin/Pages/index.js` and the bundled output goes to `/bin/Pages/bundles/index.js`.  Now that we get that, we can revert the change though.
 
 Since `/src/Pages/index.jsx` is going through the JSX transform though, let's go ahead and use JSX for it.
 

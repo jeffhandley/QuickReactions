@@ -63,4 +63,4 @@ http.createServer(function (req, res) {
 console.log('Server running at http://localhost:1337/')
 </pre>
 
-[Next » Creating a React Component](7-react-components)
+[Next » Creating a React Component](07-react-components)

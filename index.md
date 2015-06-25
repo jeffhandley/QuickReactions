@@ -17,4 +17,4 @@ I wanted to learn by starting truly from scratch and building the app up in logi
 
 These 7 major steps are achieved over the course of 19 detailed iterations on the project, starting from nothing and building a functioning isomorphic page. Let's get started by getting Node.js serving a "Hello World" page.
 
-[Begin » Creating Hello World in Node.js](1-helloworld.html)
+[Begin » Creating Hello World in Node.js](01-helloworld.html)

@@ -74,4 +74,4 @@ If you view source in the browser, you'll see something like the following.
 &lt;/html&gt;
 </pre>
 
-[Next » Improving Development Workflow with Gulp](3-gulp-workflow)
+[Next » Improving Development Workflow with Gulp](03-gulp-workflow)

@@ -51,4 +51,4 @@ gulp.task('default', function() {
 
 We can still improve this though, simplifying our Gulp code and make it automatically restart everything if our JSX code changes.
 
-[Next » Restarting Node When Changes Occur](5-gulp-restart)
+[Next » Restarting Node When Changes Occur](05-gulp-restart)

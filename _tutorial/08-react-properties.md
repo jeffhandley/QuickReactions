@@ -41,7 +41,7 @@ module.exports = React.createClass({
       &lt;div&gt;
         &lt;div&gt;
           This is from the HelloWorld.jsx
-          component's render function.
+          component render function.
         &lt;/div&gt;
         &lt;div&gt;
           Rendered from: {this.props.from}
@@ -64,7 +64,7 @@ module.exports = React.createClass({
     return (
       &lt;div&gt;
         This is from the HelloWorld.jsx
-        component's render function.
+        component render function.
       &lt;/div&gt;
       &lt;div&gt;
         Rendered from: {this.props.from}
@@ -76,4 +76,4 @@ module.exports = React.createClass({
 
 It took a few minutes to understand, but what was happening is the `HelloWorld.jsx` file's return statement had two adjacent `<div>` tags.  This syntax is unsupported; as the error message explains, the output must be wrapped in an outer element--I just wrapped the two `<div>` elements in an outer `<div>`, as seen above in the working code.
 
-[Next » Running React on the Client](9-react-client)
+[Next » Running React on the Client](09-react-client)

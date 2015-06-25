@@ -88,4 +88,4 @@ We can see that the HelloWorld component clearly contained the "server.jsx, runn
 
 For one last illustration to see that this is working, you can disable JavaScript (Chrome's developer tools has a handy checkbox for that), refresh the page, and see only the server-rendered HelloWorld message.  The Timestamp won't render and the HelloWorld message won't change to the client's message.
 
-[Finished » References](20-references)
+[Finished » References](references)

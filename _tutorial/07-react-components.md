@@ -15,7 +15,7 @@ module.exports = React.createClass({
     return (
       &lt;div&gt;
         This is from the HelloWorld.jsx
-        component's render function.
+        component render function.
       &lt;/div&gt;
     )
   }
@@ -52,4 +52,4 @@ console.log('Server running at http://localhost:1337/')
 
 Notice that in the `require` statement, we omit the file extension--the .js extension will be used automatically.  It's noteworthy that we've created the component as `Components/HelloWorld.jsx` but it will get transformed into `lib/Components/HelloWorld.js`.  Likewise, even though we're writing code in `index.jsx`, it will be running from `lib/index.js` where its relative path reference to `./Components/HelloWorld` will result in finding `lib/Components/HelloWorld.js`.  At first, I thought there would be some gymnastics or inconsistencies surfacing here, but since `require` infers the `.js` file extension, it comes together pretty cleanly.
 
-[Next » Passing Properties to Components](8-react-properties)
+[Next » Passing Properties to Components](08-react-properties)

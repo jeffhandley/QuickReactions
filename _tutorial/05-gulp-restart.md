@@ -56,4 +56,4 @@ gulp.task('default', function() {
 
 To see the effects of this, try editing the `lib/index.js` file directly and you'll see that nodemon will restart the server for us right away.
 
-[Next » Completing the Gulp Workflow](6-gulp-complete)
+[Next » Completing the Gulp Workflow](06-gulp-complete)

@@ -16,7 +16,7 @@ module.exports = React.createClass({
       &lt;div&gt;
         &lt;div&gt;
           This is from the HelloWorld.jsx
-          component's render function.
+          component render function.
         &lt;/div&gt;
         &lt;div&gt;
           Rendered from: {this.props.from}
@@ -41,7 +41,7 @@ module.exports = React.createClass({
       &lt;div&gt;
         &lt;div&gt;
           This is from the HelloWorld.jsx
-          component's render function.
+          component render function.
         &lt;/div&gt;
         &lt;div&gt;
           Rendered from: {this.state.from}
