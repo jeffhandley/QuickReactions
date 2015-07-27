@@ -3,7 +3,7 @@ layout: default
 title: React's JSX Syntax
 step: 2
 ---
-1. npm install react -save
+1. npm install react --save
 1. Rename `index.js` to `index.jsx`
 
 Update `index.jsx` to the following:
