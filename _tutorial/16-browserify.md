@@ -5,7 +5,7 @@ step: 16
 ---
 Node uses something called [CommonJS](http://www.commonjs.org/specs/modules/1.0/) to export and require modules.  This same pattern can be used in the browser if we run our code through a tool called [http://browserify.org/](Browserify).  Browserify will end up taking our code entry point and all of the dependencies needed to give us a bundled JavaScript file that has everything we need.
 
-1. npm install browserify --save-dev
+1. `npm install browserify --save-dev`
 
 With Browserify installed, the next step will be to rearrange our code so that we are consistently using `module.exports` and `require()`.  In order to get our paths right in our `require()` statements, we'll need to move some files around.
 
