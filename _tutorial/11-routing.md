@@ -5,7 +5,7 @@ step: 11
 ---
 Okay, I've had enough of the HTML string building.  Let's get some basic routing in on the server so that we can serve files instead.  We'll use `Express` for that.
 
-1. npm install express -save
+1. `npm install express --save`
 
 With `Express` installed, we can now get rid of our raw **http** code, spin up an `Express` server instance instead, and then use `express.static` to serve our static files.  With that in place, we can use a `<script src="..."></script>` tag to get our `Timestamp.js` file down to the browser.  Here's what `index.jsx` looks like after those transformations.
 
