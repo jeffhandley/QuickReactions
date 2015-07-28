@@ -7,8 +7,8 @@ For this step, you first need to follow the instructions found at [nodejs.org](h
 
 ## Create a new "project"
 1. CD into a new directory
-1. git init
-1. npm init
+1. `git init`
+1. `npm init`
 
 ## Get Node to emit Hello World with hard-coded HTML
 Create `index.js` using the example webserver code from [https://nodejs.org](https://nodejs.org/).
