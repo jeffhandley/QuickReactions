@@ -5,8 +5,8 @@ step: 5
 ---
 We'll use the `gulp-react` package to take over the JSX transformation and the `gulp-nodemon` package to run Node for us.
 
-1. npm uninstall react-tools --save-dev (this is no longer needed as a direct dependency)
-1. npm install gulp-react --save-dev
+1. `npm uninstall react-tools --save-dev` (this is no longer needed as a direct dependency)
+1. `npm install gulp-react --save-dev`
 
 Now, let's rewrite `gulpfile.js` to use gulp-react to process `*.jsx` files and put the output into the `lib` folder.  This is a lot simpler!
 
