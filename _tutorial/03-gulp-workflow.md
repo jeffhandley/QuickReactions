@@ -5,8 +5,8 @@ step: 3
 ---
 After running JSX manually once, it's pretty clear that we won't want to keep running that every time we make a change.  Instead of running `JSX` and then `Node` over and over again, we'll use Gulp to automatically run JSX and Node for us.
 
-1. npm install --global gulp
-1. npm install --save-dev gulp
+1. `npm install --global gulp`
+1. `npm install --save-dev gulp`
 
 We'll need to create a `gulpfile.js` at the root of our project.  Let's start with their skeleton:
 
