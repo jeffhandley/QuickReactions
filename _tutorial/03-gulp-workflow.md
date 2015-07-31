@@ -61,4 +61,4 @@ gulp.task('default', function() {
 
 Now if we run `gulp` from the terminal, it will run the JSX transformation for us.  We're halfway there; the other half is to make gulp spawn off a Node process for running the created `./lib/index.js` file too.
 
-[Next » Running Node Through Gulp](4-gulp-node)
+[Next » Running Node Through Gulp](04-gulp-node)
