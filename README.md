@@ -1,5 +1,5 @@
 # QuickReactions
-Isomorphic Hello World with React and Node
+## Isomorphic Hello World with React and Node
 
 While working through sample after sample for Node.js and React.js, I experienced a pattern that wasn’t very helpful. Instead of truly starting from scratch, the samples kept walking through step-by-step of cloning a working solution. They’d start with “Step 1: paste this fully-working code into this file” and “Step 2: paste this fully-working code into this other file.” I was having a hard time finding a breakdown of the concepts being applied.
 
