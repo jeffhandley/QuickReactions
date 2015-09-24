@@ -27,7 +27,7 @@ gulp.task('default', function() {
 
 Gulp's piping make this really clean.  And we can now use `gulp-nodemon` to take care of running Node for us.
 
-1. npm install gulp-nodemon --save-dev
+1. 'npm install gulp-nodemon --save-dev'
 
 With this package in place, we can easily get Node to restart whenever a JS file is updated.  Here's our new `gulpfile.js` with that plugged in.
 
