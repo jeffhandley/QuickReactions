@@ -5,8 +5,8 @@ step: 6
 ---
 To bring this all together, we need to get Gulp to watch our `index.jsx` file and call our `jsx` task whenever the file is touched. Then we'll be able to run Gulp once and freely edit the `index.jsx` file and have the changes pick up automatically. First you'll need to install Gulp Watch:
 
-1. 'npm install gulp-watch --save-dev'
-2. Then make the following changes to 'gulpfile.js':
+1. `npm install gulp-watch --save-dev`
+2. Then make the following changes to `gulpfile.js`:
 
 <pre class="brush: js">
 var gulp = require('gulp')
