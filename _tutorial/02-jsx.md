@@ -33,8 +33,8 @@ console.log('Server running at http://localhost:1337/')
 ## Get the react-tools installed
 This will allow us to use React's JSX syntax and compile it to raw JS
 
-1. npm install --global react-tools
-1. npm install --save-dev react-tools
+1. `npm install react-tools --global`
+1. `npm install react-tools --save-dev`
 
 ## Compile the JSX manually
 Now if you run `jsx index.jsx > index.js` the JSX file will be compiled into raw JavaScript.  The output will match the following.
