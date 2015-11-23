@@ -120,9 +120,9 @@ This should put all of the pieces in place for us:
 
 And as a reminder, there are a few other moving parts:
 
-1. `/index.jsx` gets transformed into raw JavaSCript at `/lib/index.js'
-1. We serve static assets from `/lib/Components' under the `/Components' path
-1. We serve static assets from `/assets' under the `/assets` path
+1. `/index.jsx` gets transformed into raw JavaSCript at `/lib/index.js`
+1. We serve static assets from `/lib/Components` under the `/Components` path
+1. We serve static assets from `/assets` under the `/assets` path
 
 With this configuration, the page that gets served with a script tag pointing to `/assets/index.js` and that results in our raw `/assets/index.js` file getting to the browser.  That file now has `require()` statements in it and that's where we need to utilize Browserify.
 
