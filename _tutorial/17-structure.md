@@ -112,4 +112,21 @@ var helloInstance = React.createFactory(HelloWorld)( {
   from: "index.jsx, transformed and running on the client" } );
 </pre>
 
+Don't forget to change the references to the Components at the top of `/src/Pages/index.jsx`.
+
+From:
+<pre class="brush: js">
+var HelloWorld = require('../lib/Components/HelloWorld')
+var Timestamp = require('../lib/Components/Timestamp')
+</pre>
+
+To:
+<pre class="brush: js">
+var HelloWorld = require('../Components/HelloWorld')
+var Timestamp = require('../Components/Timestamp')
+</pre>
+
+This will reflect the changes to our folder structure.  Gulp should be able to build correctly now.
+
+
 [Next » Using JSX for the Pages](18-jsx-pages)
