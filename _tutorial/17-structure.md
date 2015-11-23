@@ -60,7 +60,7 @@ gulp.task('default', function() {
 })
 </pre>
 
-After killing the running Gulp process, ensuring the `/lib` folder is deleted, and restarting Gulp, ~~everything should be back to working~~ finish the steps below and everything should be back to working.  This gives us a new structure that will be easier to work with.
+After killing the running Gulp process, ensuring the `/lib` folder is deleted, and restarting Gulp, we're almost back to working.  There are just a few more details to finish below.  The end result will be a new structure that will be easier to work with.
 
 <pre>
     /                   - Configuration and other general files
