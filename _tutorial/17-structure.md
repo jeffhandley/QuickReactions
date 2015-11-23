@@ -60,7 +60,7 @@ gulp.task('default', function() {
 })
 </pre>
 
-After killing the running Gulp process, ensuring the `/lib` folder is deleted, and restarting Gulp, everything should be back to working.  This gives us a new structure that will be easier to work with.
+After killing the running Gulp process, ensuring the `/lib` folder is deleted, and restarting Gulp, ~~everything should be back to working~~ finish the steps below and everything should be back to working.  This gives us a new structure that will be easier to work with.
 
 <pre>
     /                   - Configuration and other general files
@@ -126,7 +126,7 @@ var HelloWorld = require('../Components/HelloWorld')
 var Timestamp = require('../Components/Timestamp')
 </pre>
 
-This will reflect the changes to our folder structure.  Gulp should be able to build correctly now.
+This will reflect the changes to our folder structure.  Gulp should build correctly now.
 
 
 [Next » Using JSX for the Pages](18-jsx-pages)
