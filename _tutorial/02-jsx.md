@@ -4,18 +4,19 @@ title: React's JSX Syntax
 step: 2
 ---
 1. `npm install react --save`
-1. Rename `index.js` to `index.jsx`
+2. `npm install react-dom --save`
+3. Rename `index.js` to `index.jsx`
 
 Update `index.jsx` to the following:
 
 <pre class="brush: js">
 var http = require('http')
-var React = require('react')
+var ReactDOMServer = require('react-dom/server')
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   res.end(
-    React.renderToString(
+    ReactDOMServer.renderToString(
       &lt;html&gt;
         &lt;head&gt;
           &lt;title&gt;Hello World&lt;/title&gt;
@@ -42,11 +43,12 @@ Now if you run `jsx index.jsx > index.js` the JSX file will be compiled into raw
 <pre class="brush: js">
 var http = require('http')
 var React = require('react')
+var ReactDOMServer = require('react-dom/server')
 
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/html'})
   res.end(
-    React.renderToString(
+    ReactDOMServer.renderToString(
       React.createElement("html", null,
         React.createElement("head", null,
           React.createElement("title", null, "Hello World")
